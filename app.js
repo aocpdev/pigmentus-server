@@ -12,10 +12,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 // Routes
 //  app.get('/', function (req, res){
 //      res.send('Hello World!');
 //  });
+app.use('/api', require('./api/routes/index'));
+
 
  // Middleware for Vue.js router mode history
 app.use(history());
