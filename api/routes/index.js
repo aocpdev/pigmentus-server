@@ -11,7 +11,7 @@ router.get('/users', getUsers);
 router.get('/users/:id', getUserById);
 
 // Post Routes
-router.post('/users', createUser);
+router.post('/addUser', createUser);
 
 // Delete
 router.delete('/users/:id', deleteUser);

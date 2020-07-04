@@ -28,9 +28,9 @@ const getUserById = async (req, res) => {
 // Posts
 const createUser = async (req, res) => {
     try {
-        const { name, email } = req.body;
+        const { name, lastname, email, enable } = req.body;
         // Insert into user table query
-        const response = await pool.query('INSERT INTO users  (name, email) VALUES ($1, $2)', [name, email]);
+        const response = await pool.query('INSERT INTO users  (name, lastname, email, enable) VALUES ($1, $2, $3, $4)', [name, lastname, email, enable]);
 
         res.json({
             message: 'User Added Succesfully',
