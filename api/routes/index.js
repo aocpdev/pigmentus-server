@@ -1,5 +1,5 @@
 import Router from 'express';
-import { getUsers, createUser, getUserById, deleteUser} from '../queries/users';
+import { getUsers, createUser, getUserById, deleteUser, updateUser} from '../queries/users';
 import { getApi } from '../queries/api';
 
 // Router
@@ -13,7 +13,10 @@ router.get('/users/:id', getUserById);
 // Post Routes
 router.post('/addUser', createUser);
 
-// Delete
+// Put Routes
+router.put('/users/:id', updateUser);
+
+// Delete Routes
 router.delete('/users/:id', deleteUser);
 
 module.exports = router;
