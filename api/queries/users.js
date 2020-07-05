@@ -69,11 +69,11 @@ const updateUser = async (req, res) => {
     try {
         const id = req.params.id; 
         const enable = true;
-        const {name, email, lastName} = req.body;
+        const {name, email, lastname} = req.body;
         
         const response = await pool.query('UPDATE users SET name = $1, lastname = $2, email = $3, enable = $4 WHERE id = $5', [
             name, 
-            lastName, 
+            lastname, 
             email, 
             enable,
             id
