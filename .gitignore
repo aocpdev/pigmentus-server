@@ -4,5 +4,5 @@ client/dist
 
 
 # Server
-server/node_modules
+node_modules
 server/public
