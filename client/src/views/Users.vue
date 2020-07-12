@@ -89,7 +89,7 @@ export default {
                 .then(res => {
                     this.users.unshift(res.data);
                     this.showAlert();
-                    this.message.text = 'User Added!'
+                    this.message.text = 'User created!'
                     this.message.color = 'success';
                     this.listUsers();
                     
@@ -104,7 +104,7 @@ export default {
                 this.user = {}
         },
         deleteUser(id){
-        this.axios.delete(`/users/${id}`)
+        this.axios.delete(`/users/deleteUser/${id}`)
             .then(res => {
             let index = this.users.findIndex( item => item.id === res.data.id )
             this.users.splice(index, 1);
