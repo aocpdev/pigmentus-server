@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && cpx \"dist/**/*.{html,png,jpg,css,js,ico}\" ../server/public"
+    "build": "vue-cli-service build && cpx \"dist/**/*.{html,png,jpg,css,js,ico,map}\" ../server/public"
   },
   "dependencies": {
     "axios": "^0.19.2",
