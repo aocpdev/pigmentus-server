@@ -29,7 +29,7 @@ app.use(passport.session());
 
 
 // Routes
-app.use('/', require('./api/routes/index'));
+// app.use('/', require('./api/routes/index'));
 app.use('/users', require('./api/routes/users'))
 
  // Middleware for Vue.js router mode history
