@@ -2,8 +2,6 @@ import Router from 'express';
 import { getUserById, getUsers, createUser, deleteUser, updateUser, getUserByEmail} from '../queries/users';
 import {pool} from '../db/index';
 import bcrypt from 'bcrypt';
-import session from 'express-session';
-import flash from 'express-flash';
 import passport from 'passport';
 
 const router = Router();
