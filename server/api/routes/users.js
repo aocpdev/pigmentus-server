@@ -19,18 +19,6 @@ router.get('/', async (req, res) => {
         });
     }
 });
-router.get('/login/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const response = await pool.query(getUserById, [id]);
-        res.json(response.rows);
-    } catch (error) {
-        return res.status(500).json({
-            message: "Error Ocurred",
-            error
-        });
-    } 
-});
 
 // Create User Post
 router.post('/register', (req, res) => {

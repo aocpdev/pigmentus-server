@@ -1,3 +1,4 @@
+// To ensure user is auth
 module.exports = {
     ensureAuthenticated: function (req, res, next) {
         if (req.isAuthenticated()) {
