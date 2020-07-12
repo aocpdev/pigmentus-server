@@ -11,15 +11,20 @@
   "author": "Axel Castro",
   "license": "ISC",
   "dependencies": {
-    "connect-history-api-fallback": "^1.6.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "morgan": "^1.10.0",
-    "pg": "^8.2.1",
     "@babel/cli": "^7.10.4",
     "@babel/core": "^7.10.4",
     "@babel/node": "^7.10.4",
-    "@babel/preset-env": "^7.10.4"
+    "@babel/preset-env": "^7.10.4",
+    "bcrypt": "^5.0.0",
+    "connect-history-api-fallback": "^1.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.1",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pg": "^8.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.4",

@@ -1,99 +1,26 @@
-const {pool} = require('../db/index');
+// Get Queries
+const getUsers = 'SELECT * FROM users';
 
-// Gets
-const getUsers = async (req, res) => {
-    try {
-        const response = await pool.query('SELECT * FROM users');
-        res.status(200).json(response.rows);
-    } catch (error){
-        return res.status(500).json({
-            message: "Error Ocurred",
-            error
-        });
-    }
-}
+const getUserById = 'SELECT * FROM users WHERE id = $1';
 
-const getUserById = async (req, res) => {
-    try {
-        const id = req.params.id;
-        const response = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
-        res.json(response.rows);
-    } catch (error) {
-        return res.status(500).json({
-            message: "Error Ocurred",
-            error
-        });
-    } 
-}
+const getUserByEmail = 'SELECT * FROM users WHERE email = $1';
 
-// Posts
-const createUser = async (req, res) => {
-    try {
-        const { name, lastname, email, enable } = req.body;
-        // Insert into user table query
-        const response = await pool.query('INSERT INTO users  (name, lastname, email, enable) VALUES ($1, $2, $3, $4)', [name, lastname, email, enable]);
+// Post Queries
+const createUser = 
+    'INSERT INTO users  (name, last_name, email, password, preferences, created_date, last_modified_date, last_seen, enable) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)';
 
-        res.json({
-            message: 'User Added Succesfully',
-            body: {
-                user: {name, email, lastname, enable}
-            }
-        });
-    } catch (error) {
-        return res.status(500).json({
-            message: "Error Ocurred",
-            error
-        });
-    }
-    
-}
+// Delete Queries
+const deleteUser = 'DELETE FROM users WHERE id = $1';
 
-// Delete
-const deleteUser = async (req, res) => {
-    try {
-        const id = req.params.id;
-        const response = await pool.query('DELETE FROM users WHERE id = $1', [id]);
-        res.json(`User ${id} deleted success`) 
-    } catch (error) {
-        return res.status(500).json({
-            message: "Error Ocurred",
-            error
-        });
-    }
-    
-}
-
-// Put 
-const updateUser = async (req, res) => {
-    console.log(req.body);
-    try {
-        const id = req.params.id; 
-        const enable = true;
-        const {name, email, lastname} = req.body;
-        
-        const response = await pool.query('UPDATE users SET name = $1, lastname = $2, email = $3, enable = $4 WHERE id = $5', [
-            name, 
-            lastname, 
-            email, 
-            enable,
-            id
-        ]);
-        console.log(response);
-        res.json('User Update Successfully');
-    } catch (error) {
-        return res.status(500).json({
-            message: "Error Ocurred",
-            error
-        });
-    }
-    
-}
+// Put Queries
+const updateUser = 'UPDATE users SET name = $1, lastname = $2, email = $3, enable = $4 WHERE id = $5';
 
 // exports
 module.exports = {
     getUsers,
-    createUser,
     getUserById,
+    createUser,
     deleteUser,
-    updateUser
+    updateUser, 
+    getUserByEmail
 }
