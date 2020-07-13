@@ -29,6 +29,11 @@ Vue.use(VueRouter)
     path: '/cart',
     name: 'cart',
     component: () => import(/* webpackChunkName: "about" */ '../views/Cart.vue')
+  },
+  {
+    path: '/categories',
+    name: 'categories',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Categories.vue')
   }
 ]
 

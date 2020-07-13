@@ -19,6 +19,14 @@
       
 
       <v-spacer></v-spacer>
+        <v-btn
+        to="/categories"
+        class="ma-2"
+        color="black"
+      >
+      Categories
+        
+      </v-btn>
         <v-text-field
         style="margin-top: 30px"
         outlined
