@@ -1,33 +1,78 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/users">Users</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="black"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Pigmentus Logo"
+          class="shrink mr-2"
+          contain
+          src="./assets/pigmentus-logo.png"
+          transition="scale-transition"
+          width="80"
+        />
+      </div>
+
+      
+
+      <v-spacer></v-spacer>
+        <v-text-field
+        style="margin-top: 30px"
+        outlined
+        label="Search"
+        filled
+        append-icon="mdi-card-search-outline"
+        
+      ></v-text-field>
+      <v-spacer></v-spacer>
+      <v-btn class="ma-2" tile large color="white" icon to="/cart">
+        <v-icon>mdi-cart</v-icon>
+      </v-btn>
+      <v-btn
+        to="/signup"
+        class="ma-2"
+        color="black"
+      >
+        Sign Up
+        
+      </v-btn>
+      <div>
+        <v-btn
+        to="/signin"
+        class="ma-2"
+        color="black"
+      >
+        Sign In
+        
+      </v-btn>
+      </div>
+      
+    </v-app-bar>
+
+    
+
+    <v-main>
+      <router-view/>
+    </v-main>
+    
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
-}
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+export default {
+  name: 'App',
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+  components: {
+    
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>

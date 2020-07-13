@@ -1,8 +1,7 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+   <v-row justify="center">
+      <h1>Este es el home aqui podrian ir los videos o categorias, de verdad no se.</h1>
+  </v-row>
 </template>
 
 <script>

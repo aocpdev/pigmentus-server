@@ -16,9 +16,19 @@ Vue.use(VueRouter)
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/users',
-    name: 'users',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Users.vue')
+    path: '/signup',
+    name: 'signup',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue')
+  },
+  {
+    path: '/signin',
+    name: 'signin',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Signin.vue')
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Cart.vue')
   }
 ]
 
