@@ -10,59 +10,52 @@
         <v-card-text>
           <v-text-field
             ref="name"
-            v-model="name"
-            :rules="[() => !!name || 'This field is required']"
-            :error-messages="errorMessages"
-            label="Full Name"
-            placeholder="John Doe"
+            v-model="user.name"
+            :rules="nameRules"
+            label="Name"
             required
           ></v-text-field>
+
           <v-text-field
-            ref="address"
-            v-model="address"
-            :rules="[
-              () => !!address || 'This field is required',
-              () => !!address && address.length <= 25 || 'Address must be less than 25 characters',
-              addressCheck
-            ]"
-            label="Address Line"
-            placeholder="Snowy Rock Pl"
-            counter="25"
+            ref="lastName"
+            v-model="user.lastName"
+            :rules="lastNameRules"
+            label="Last Name"
             required
           ></v-text-field>
+
           <v-text-field
-            ref="city"
-            v-model="city"
-            :rules="[() => !!city || 'This field is required', addressCheck]"
-            label="City"
-            placeholder="El Paso"
+            ref="email"
+            v-model="user.email"
+            :rules="emailRules"
+            label="Email"
             required
           ></v-text-field>
+
           <v-text-field
-            ref="state"
-            v-model="state"
-            :rules="[() => !!state || 'This field is required']"
-            label="State/Province/Region"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            ref="password"
+            :type="show1 ? 'text' : 'password'"
+            v-model="user.password1"
+            :rules="passwordRules"
+            label="Password"
             required
-            placeholder="TX"
+            @click:append="show1 = !show1"
           ></v-text-field>
+
           <v-text-field
-            ref="zip"
-            v-model="zip"
-            :rules="[() => !!zip || 'This field is required']"
-            label="ZIP / Postal Code"
+            ref="password2"
+            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show2 ? 'text' : 'password'"
+            v-model="user.password2"
+            @click:append="show2 = !show2"
+            :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
+            label="Confirm Password"
             required
-            placeholder="79938"
           ></v-text-field>
-          <v-autocomplete
-            ref="country"
-            v-model="country"
-            :rules="[() => !!country || 'This field is required']"
-            :items="countries"
-            label="Country"
-            placeholder="Select..."
-            required
-          ></v-autocomplete>
+          
+        
+          
         </v-card-text>
         <v-divider class="mt-12"></v-divider>
         <v-card-actions>
@@ -147,104 +140,83 @@
 
 <script>
 export default {
-    data() {
-        return {
-            users: [],
-            dismissSecs: 5,
-            dismissCountDown: 0,
-            message: {color: '', text: ''},
-            user: {name: '', email: ''},
-            add: true,
-            updateUser: {},
-        }
-    }, 
-    created() {
-        this.listUsers();
-    },
+    data: () => ({
+            user: {}, 
+            password2: '',
+            show1: false,
+            show2: false,
+            formHasErrors: false,
+            nameRules: [
+                v => !!v || 'Name is required'
+            ],
+            lastNameRules: [
+                v => !!v || 'Last Name is required'
+            ],
+            emailRules: [
+                v => !!v || 'E-mail is required',
+                v => /.+@.+.com+/.test(v) || 'E-mail must be valid',
+            ],
+            passwordRules: [
+                v => !!v || 'Password is required',
+            ],
+            confirmPasswordRules: [
+                v => !!v || "Confirm Password is required"
+            ]
+    }), 
     methods: {
-        alert(){
-            this.message.color = 'success'
-            this.message.text = 'Test Alert'
-            this.showAlert();
-        },
-        listUsers(){
-            this.axios.get('/users')
-            .then((response) => {
-                this.users = response.data
-            })
-            .catch((e) => {
-                console.log('error' + e);
-            })
-        },
-        addUser(item) {
-            item.enable = true;
-            this.axios.post('/addUser', item)
-                .then(res => {
-                    this.users.unshift(res.data);
-                    this.showAlert();
-                    this.message.text = 'User created!'
-                    this.message.color = 'success';
-                    this.listUsers();
+        addUser() {
+            this.user.enable = true
+            console.log(this.user)
+            // item.enable = true;
+            // this.axios.post('/addUser', item)
+            //     .then(res => {
+            //         this.users.unshift(res.data);
+            //     })
+            //     .catch(e => {
                     
-                })
-                .catch(e => {
-                    
-                    this.showAlert();
-                    this.message.color = 'danger';
-                    this.message.text = 'error';
-                    
-                })
-                this.user = {}
-        },
-        deleteUser(id){
-        this.axios.delete(`/users/deleteUser/${id}`)
-            .then(res => {
-            let index = this.users.findIndex( item => item.id === res.data.id )
-            this.users.splice(index, 1);
+            //         console.log("Error: ", e);
+            //     })
+            //     this.user = {}
+            // router.push({ name: "signin"})
+        }, 
+        resetForm () {
+        this.errorMessages = []
+        this.formHasErrors = false
 
-            this.showAlert();
-            this.message.text = 'User Deleted!'
-            this.message.color = 'danger'
-            this.listUsers();
-            })
-            .catch( e => {
-            console.log(e.response);
-            })
+        Object.keys(this.form).forEach(f => {
+          this.$refs[f].reset()
+        })
+      },
+        submit(){
+            this.formHasErrors = false
+
+        Object.keys(this.form).forEach(f => {
+          if (!this.form[f]) this.formHasErrors = true
+            
+          this.$refs[f].validate(true)
+        })
+
+
+        // if (this.formHasErrors = false) {
+        //     this.addUser();
+        // }
+            
+            
+        }  
+    },
+    computed: {
+        form () {
+            return {
+                name: this.name,
+                lastName: this.lastName,
+                email: this.email, 
+                password: this.password,
+                password2: this.password2
+            }
         },
-        activeEdit(id){
-            this.add = false;
-            this.axios.get(`users/${id}`)
-                .then(res => {
-                    console.log(res);
-                    this.updateUser = res.data[0];
-                })
-                .catch(e => {
-                    console.log(e.response);
-                })
-        },
-        editUser(item){
-            this.axios.put(`users/${item.id}`, item)
-            .then(res => {
-                this.updateUser = {}
-                this.showAlert();
-                this.listUsers();
-                this.message.text = 'Edit Success'
-                this.message.color = 'success'
-            })
-            .catch(e => {
-                console.log(e);
-                this.showAlert();
-                    this.message.color = 'danger';
-                    this.message.text = 'error';
-            });
-            this.add = true;
-        },
-        countDownChanged(dismissCountDown) {
-            this.dismissCountDown = dismissCountDown
-        },
-        showAlert() {
-            this.dismissCountDown = this.dismissSecs
+        passwordConfirmationRule() {
+            return () => (this.user.password1 === this.user.password2) || 'Password must match'
         }
-    }
+    },
 }
 </script>

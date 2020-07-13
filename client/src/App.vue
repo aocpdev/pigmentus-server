@@ -1,10 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="black"
-      dark
-    >
+    <v-app-bar app color="black" dark>
       <div class="d-flex align-center">
         <v-img
           alt="Pigmentus Logo"
@@ -16,26 +12,25 @@
         />
       </div>
 
-      
+      <v-spacer></v-spacer>
+
+        <v-btn
+          to="/categories"
+          class="ma-2"
+          color="black"
+        >
+        Categories
+        </v-btn>
+        <v-text-field
+          style="margin-top: 30px"
+          outlined
+          label="Search"
+          filled
+          append-icon="mdi-card-search-outline"
+        ></v-text-field>
 
       <v-spacer></v-spacer>
-        <v-btn
-        to="/categories"
-        class="ma-2"
-        color="black"
-      >
-      Categories
-        
-      </v-btn>
-        <v-text-field
-        style="margin-top: 30px"
-        outlined
-        label="Search"
-        filled
-        append-icon="mdi-card-search-outline"
-        
-      ></v-text-field>
-      <v-spacer></v-spacer>
+
       <v-btn class="ma-2" tile large color="white" icon to="/cart">
         <v-icon>mdi-cart</v-icon>
       </v-btn>
@@ -45,19 +40,14 @@
         color="black"
       >
         Sign Up
-        
       </v-btn>
-      <div>
         <v-btn
         to="/signin"
         class="ma-2"
         color="black"
       >
         Sign In
-        
       </v-btn>
-      </div>
-      
     </v-app-bar>
 
     
@@ -65,8 +55,43 @@
     <v-main>
       <router-view/>
     </v-main>
+
+
+  <v-footer
+    dark
+    padless
+  >
+    <v-card
+      class="flex"
+      flat
+      tile
+    >
+      <v-card-title class="teal">
+        <strong class="subheading">Get connected with us on social networks!</strong>
+
+        <v-spacer></v-spacer>
+
+        <v-btn
+          v-for="icon in icons"
+          :key="icon"
+          class="mx-4"
+          dark
+          icon
+        >
+          <v-icon size="24px">{{ icon }}</v-icon>
+        </v-btn>
+      </v-card-title>
+
+      <v-card-text class="py-2 white--text text-center">
+        {{ new Date().getFullYear() }} — <strong>Pigmentus</strong>
+      </v-card-text>
+    </v-card>
+  </v-footer>
+
+    
     
   </v-app>
+  
 </template>
 
 <script>
@@ -80,7 +105,12 @@ export default {
   },
 
   data: () => ({
-    //
+    icons: [
+        'mdi-facebook',
+        'mdi-twitter',
+        'mdi-linkedin',
+        'mdi-instagram',
+      ],
   }),
 };
 </script>
