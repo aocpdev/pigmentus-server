@@ -1,5 +1,5 @@
 import { pool } from '../db/index';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { getUserByEmail, getUserById } from '../queries/users'
 
 const localStrategy = require('passport-local').Strategy;

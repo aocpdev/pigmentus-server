@@ -5,7 +5,8 @@ import path from 'path';
 import history from 'connect-history-api-fallback';
 import session from 'express-session';
 import passport from 'passport'; 
-import initializePassport from './api/passport/local-auth'
+import initializePassport from './api/passport/local-auth';
+import flash from 'express-flash';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(flash());
 
 // Express Session
 app.use(session({

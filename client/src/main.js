@@ -17,8 +17,13 @@ import 'vuetify/dist/vuetify.min.css'
 Vue.config.productionTip = false
 
 // API URL
-// axios.defaults.baseURL = 'http://localhost:3000/'; // Local
-axios.defaults.baseURL = 'https://pigmentus.herokuapp.com'; // Production
+if (process.env.NODE_ENV === 'production') {
+  axios.defaults.baseURL = 'https://pigmentus.herokuapp.com'; // Production
+}else {
+  axios.defaults.baseURL = 'http://localhost:3000/'; // Local
+  
+}
+
 
 new Vue({
   router,
