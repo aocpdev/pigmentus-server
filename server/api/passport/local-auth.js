@@ -1,4 +1,3 @@
-import { pool } from '../db/index';
 import bcrypt from 'bcryptjs';
 import { getUserByEmail, getUserById } from '../queries/users'
 
@@ -7,7 +6,7 @@ const localStrategy = require('passport-local').Strategy;
 function initialize (passport) {
     const authenticateUser = (email, password, done) => {
 
-        pool.query(getUserByEmail, [email])
+        getUserByEmail(email)
         .then(user => {
             if (user.rows.length > 0) {
                 bcrypt.compare(password, user.rows[0].password, (err, isMatch) => {
@@ -38,15 +37,12 @@ function initialize (passport) {
     passport.serializeUser((user, done) => done(null, user.rows[0].id));
 
     passport.deserializeUser((id, done) => {
-        pool.query(
-            getUserById, 
-            [id], (err, results) => {
-                if (err) {
-                    throw err;
-                }
-                return done(null, results.rows[0]);
+        getUserById(id, (err, results) => {
+            if (err) {
+                throw err;
             }
-        )
+            return done(null, results.rows[0]);
+        })
     }) 
 }
 

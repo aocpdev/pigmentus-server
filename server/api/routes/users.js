@@ -1,6 +1,5 @@
 import Router from 'express';
-import { getUserById, getUsers, createUser, deleteUser, updateUser, getUserByEmail} from '../queries/users';
-import {pool} from '../db/index';
+import { getUsers, createUser, getUserByEmail} from '../queries/users';
 import bcrypt from 'bcryptjs';
 import passport from 'passport';
 
@@ -8,7 +7,7 @@ const router = Router();
 
 router.get('/', async (req, res) => {
     try {
-        const response = await pool.query(getUsers);
+        const response = await getUsers();
         res.status(200).json(response.rows);
     } catch (error){
         return res.status(500).json({
@@ -50,7 +49,7 @@ router.post('/register', (req, res) => {
                 message: 'Register error'
             })
         } else {
-            pool.query(getUserByEmail, [email])
+            getUserByEmail(req.body.email)
             .then(user => {
                 if(user.rows.length > 0){
                     res.json({
@@ -59,7 +58,8 @@ router.post('/register', (req, res) => {
                 } else {
                     bcrypt.hash(password1, 10)
                     .then(hashedPassword => {
-                        pool.query(createUser, [name, last_name, email, hashedPassword, preferences, created_date, last_modified_date, last_seen, enable])
+                        req.body.password = hashedPassword;
+                        createUser(req.body)
                         .then(createdUser => {
                             res.json({
                                 message: 'User Added Succesfully',
@@ -93,44 +93,44 @@ router.get('logout', (req, res) => {
 })
 
 // Put Routes
-router.put('/users/:id', async (req, res) => {
-    console.log(req.body);
-    try {
-        const id = req.params.id; 
-        const enable = true;
-        const {name, email, lastname} = req.body;
+// router.put('/users/:id', async (req, res) => {
+//     console.log(req.body);
+//     try {
+//         const id = req.params.id; 
+//         const enable = true;
+//         const {name, email, lastname} = req.body;
         
-        const response = await pool.query(updateUser, [
-            name, 
-            lastname, 
-            email, 
-            enable,
-            id
-        ]);
-        res.json('User Update Successfully');
-    } catch (error) {
-        return res.status(500).json({
-            message: "Error Ocurred",
-            error
-        });
-    }
+//         const response = await pool.query(updateUser, [
+//             name, 
+//             lastname, 
+//             email, 
+//             enable,
+//             id
+//         ]);
+//         res.json('User Update Successfully');
+//     } catch (error) {
+//         return res.status(500).json({
+//             message: "Error Ocurred",
+//             error
+//         });
+//     }
     
-});
+// });
 
 // Delete Routes
-router.delete('/deleteUser/:id', async (req, res) => {
+// router.delete('/deleteUser/:id', async (req, res) => {
     
-    try {
-        const id = req.params.id;
-        const response = await pool.query(deleteUser, [id]);
-        res.json(`User ${id} deleted success`) 
-    } catch (error) {
-        return res.status(500).json({
-            message: "Error Ocurred",
-            error
-        });
-    }
+//     try {
+//         const id = req.params.id;
+//         const response = await pool.query(deleteUser, [id]);
+//         res.json(`User ${id} deleted success`) 
+//     } catch (error) {
+//         return res.status(500).json({
+//             message: "Error Ocurred",
+//             error
+//         });
+//     }
     
-});
+// });
 
 module.exports = router;
