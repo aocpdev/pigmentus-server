@@ -23,6 +23,7 @@ app.use(session({
 // Routes
 // app.use('/', require('./api/routes/index'));
 app.use('/users', require('./api/routes/users'));
+app.use('/profile', require('./api/routes/profile'));
 
  // Middleware for Vue.js router mode history
 app.use(history());

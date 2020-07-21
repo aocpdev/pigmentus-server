@@ -25,15 +25,12 @@ exports.user_login = (req, res, next) => {
                             if (pass) {
                                 let user = response.rows[0];
 
-                                let token = jwt.sign({
-                                    data: user
-                                  }, 
-                                  'secret', 
-                                  { expiresIn: 60 * 60 * 24 * 30}) 
+                                let token = jwt.sign({ data: user }, 'secret', { expiresIn: 60 * 60 * 24 * 30}) 
+                                
+                                res.status(200).cookie('token', token, { maxAge: 86400, httpOnly: true }).send();
 
-                                res.status(200).json({
-                                    token: token
-                                })
+                                // const rawCookies = req.headers.cookie.split('; ');
+                                // console.log(rawCookies)
                             } else {
                                 res.status(401).json({
                                     message: 'Invald user or password'
@@ -46,7 +43,7 @@ exports.user_login = (req, res, next) => {
     } catch (error) {
         
     }
-  }
+}
 
 exports.user_signup = (req, res, next) => {
     
