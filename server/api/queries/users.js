@@ -12,7 +12,7 @@ const getUserByEmail =  function (email) {
 }
 // Post Queries
 const createUser = function (user) {
-    return 'INSERT INTO users  (name, last_name, email, password, preferences, created_date, last_modified_date, last_seen, enable) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)', 
+    return pool.query('INSERT INTO users  (name, last_name, email, password, preferences, created_date, last_modified_date, last_seen, enable) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)', 
     [
         user.name,
         user.last_name, 
@@ -23,7 +23,7 @@ const createUser = function (user) {
         user.last_modified_date,
         user.last_seen,
         user.enable
-    ];
+    ]);
 }
 // Delete Queries
 const deleteUser = function (id) {

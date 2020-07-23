@@ -1,6 +1,9 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { getUserByEmail, createUser, deleteUser, updateUser} from '../api/queries/users';
+import { saveToken, hasToken, updateToken} from '../api/queries/auth';
+
+require('dotenv').config();
 
 
 exports.user_login = (req, res, next) => {
@@ -24,11 +27,31 @@ exports.user_login = (req, res, next) => {
                         .then(pass => {
                             if (pass) {
                                 let user = response.rows[0];
+                            
+                                let token = jwt.sign({ data: user }, 'secret', { expiresIn: '12h'});
 
-                                let token = jwt.sign({ data: user }, 'secret', { expiresIn: 60 * 60 * 24 * 30}) 
+                                hasToken(user.id)
+                                    .then(userToken => {
+                                        let authToken = { token: token, issued_date: new Date(), id: user.id };
+
+                                        if (userToken.rows.length > 0){
+                                            updateToken(authToken)
+                                                .then(authInfo => {
+                                                    res.status(200).cookie('token', token, { maxAge: 43200, httpOnly: true }).send();
+                                                }).catch(err => {err});
+                                        } else {
+                                            saveToken(authToken)
+                                                .then(authInfo => {
+                                                    res.status(200).cookie('token', token, { maxAge: 43200, httpOnly: true }).send();
+                                                }).catch(err => {err});
+                                        }
+                                    }).catch(err => {err});
+
                                 
-                                res.status(200).cookie('token', token, { maxAge: 86400, httpOnly: true }).send();
 
+                                
+                                
+                                
                                 // const rawCookies = req.headers.cookie.split('; ');
                                 // console.log(rawCookies)
                             } else {
@@ -36,7 +59,7 @@ exports.user_login = (req, res, next) => {
                                     message: 'Invald user or password'
                                 })
                             }
-                        })
+                        }).catch(err => {})
                 }
                 
             })
@@ -84,21 +107,23 @@ exports.user_signup = (req, res, next) => {
                         message: `User do not exist`
                     })
                 } else {
+                    const now = new Date();
                     bcrypt.hash(password1, 10)
                         .then(hashedPassword => {
-                            let userCreated = {name, last_name, email, hashedPassword, preferences, created_date, last_modified_date, last_seen, enable}
-                            createUser(userCreated)
-                                .then(createdUser => {
-                                    res.status(200).json({
-                                        message: 'User Added Succesfully',
-                                        body: {
-                                            createdUser
-                                        }
-                                    });
-                                })
-                                .catch()
+                            let password = hashedPassword;
+                            let last_seen = now;
+                            let created_date = now;
+                            let last_modified_date = now;
+                            if(password){
+                                const userCreated = {name, last_name, email, password, preferences, created_date, last_modified_date, last_seen, enable};
+                                createUser(userCreated)
+                                    .then(user => {
+                                        res.status(200).json({
+                                            message: "User added succesfully"
+                                        })
+                                    })
+                            }
                         })
-                    
                 }
             })
         }

@@ -1,10 +1,10 @@
 import Router from 'express';
 import { getUsers } from '../queries/users';
-import verificarAuth from '../../auth/auth'
+import verifyAuth from '../../auth/auth'
 
 const router = Router();
 
-router.get('/', verificarAuth, async (req, res) => {
+router.get('/', verifyAuth, async (req, res) => {
     try {
         const response = await getUsers();
         res.status(200).json(response.rows);
