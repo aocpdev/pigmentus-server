@@ -1,11 +1,15 @@
-import express from 'express';
-import morgan from 'morgan';
-import cors from 'cors';
-import path from 'path';
-import history from 'connect-history-api-fallback';
-import session from 'express-session';
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const path = require('path');
+const history = require('connect-history-api-fallback');
+const session = require('express-session');
+
+require('dotenv').config();
 
 const app = express();
+
+
 
 // Midlewares
 app.use(morgan('tiny'));
@@ -15,14 +19,14 @@ app.use(express.urlencoded({ extended: true }));
 
 // Express Session
 app.use(session({
-    secret: 'secret', 
+    secret: process.env.JWT_KEY, 
     resave: false,
     saveUninitialized: false
 }))
 
 // Routes
 // app.use('/', require('./api/routes/index'));
-app.use('/users', require('./api/routes/users'));
+app.use('/auth', require('./api/routes/auth'));
 app.use('/profile', require('./api/routes/profile'));
 
  // Middleware for Vue.js router mode history

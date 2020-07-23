@@ -1,6 +1,6 @@
-import Router from 'express';
-import { getUsers } from '../queries/users';
-import verifyAuth from '../../auth/auth'
+const Router = require('express');
+const { getUsers } = require('../queries/users');
+const verifyAuth = require('../../auth/auth');
 
 const router = Router();
 

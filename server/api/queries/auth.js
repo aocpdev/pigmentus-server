@@ -1,4 +1,4 @@
-import { pool } from '../../config/database';
+const { pool } = require('../../config/database');
 
 const saveToken = function (authInfo) {
     return pool.query('INSERT INTO user_auth (id, token, issued_date) VALUES ($1, $2, $3)', 

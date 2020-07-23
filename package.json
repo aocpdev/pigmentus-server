@@ -6,7 +6,7 @@
   "scripts": {
     "start": "babel-node server/app.js --exec",
     "dev": "nodemon server/app.js",
-    "devbabel": "nodemon server/app.js --exec babel-node"
+    "devb": "nodemon server/app.js --exec babel-node"
   },
   "author": "Axel Castro",
   "license": "ISC",

@@ -1,5 +1,5 @@
 // Get Queries
-import { pool } from '../../config/database';
+const { pool } = require('../../config/database');
 
 const getUsers = function () {
     return pool.query('SELECT * FROM users');

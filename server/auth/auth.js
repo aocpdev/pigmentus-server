@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
-import  { hasToken, updateToken } from '../api/queries/auth';
+const  { hasToken, updateToken } = require('../api/queries/auth');
+
+require('dotenv').config();
 
 const verifyAuth = (req, res, next) => {
 
@@ -8,7 +10,7 @@ const verifyAuth = (req, res, next) => {
 
   console.log(token);
 
-  jwt.verify(token, 'secret', (err, decoded) => {
+  jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
 
     if(err) {
 
@@ -25,12 +27,12 @@ const verifyAuth = (req, res, next) => {
 
           if (new Date() - authInfo.rows[0].issued_date > fifteenMinutes){
 
-            let token = jwt.sign({ data: decoded.data }, 'secret', { expiresIn: '12h'});
+            let token = jwt.sign({ data: decoded.data }, process.env.JWT_KEY, { expiresIn: '12h'});
           
             let authInfo = {token: token, issued_date: new Date(), id: decoded.data.id}
 
             updateToken(authInfo)
-              .then(authInfoUpdtae => {
+              .then(authInfoUpdate => {
                 res.status(200).cookie('token', token, { maxAge: 43200, httpOnly: true }).send();
                 next();
               }).catch(err => {err});

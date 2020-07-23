@@ -1,7 +1,7 @@
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { getUserByEmail, createUser, deleteUser, updateUser} from '../api/queries/users';
-import { saveToken, hasToken, updateToken} from '../api/queries/auth';
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { getUserByEmail, createUser, deleteUser, updateUser} = require('../api/queries/users');
+const { saveToken, hasToken, updateToken} = require('../api/queries/auth');
 
 require('dotenv').config();
 
@@ -18,7 +18,7 @@ exports.user_login = (req, res, next) => {
 
                 if (response.rows.length === 0) {
                     res.status(401).json({
-                        message: 'Invald user or password'
+                        message: 'Invalid user or password'
                     })
                 }
 
@@ -28,7 +28,7 @@ exports.user_login = (req, res, next) => {
                             if (pass) {
                                 let user = response.rows[0];
                             
-                                let token = jwt.sign({ data: user }, 'secret', { expiresIn: '12h'});
+                                let token = jwt.sign({ data: user }, process.env.JWT_KEY, { expiresIn: '12h'});
 
                                 hasToken(user.id)
                                     .then(userToken => {
@@ -38,25 +38,17 @@ exports.user_login = (req, res, next) => {
                                             updateToken(authToken)
                                                 .then(authInfo => {
                                                     res.status(200).cookie('token', token, { maxAge: 43200, httpOnly: true }).send();
-                                                }).catch(err => {err});
+                                                }).catch(err => res.status(401).json({err}));
                                         } else {
                                             saveToken(authToken)
                                                 .then(authInfo => {
                                                     res.status(200).cookie('token', token, { maxAge: 43200, httpOnly: true }).send();
-                                                }).catch(err => {err});
+                                                }).catch(err => res.status(401).json({err}));
                                         }
-                                    }).catch(err => {err});
-
-                                
-
-                                
-                                
-                                
-                                // const rawCookies = req.headers.cookie.split('; ');
-                                // console.log(rawCookies)
+                                    }).catch(err => res.status(401).json({err}));
                             } else {
                                 res.status(401).json({
-                                    message: 'Invald user or password'
+                                    message: 'Invalid user or password'
                                 })
                             }
                         }).catch(err => {})
@@ -64,7 +56,9 @@ exports.user_login = (req, res, next) => {
                 
             })
     } catch (error) {
-        
+        res.status(500).json({
+            error
+        });
     }
 }
 
