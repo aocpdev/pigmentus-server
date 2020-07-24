@@ -78,7 +78,7 @@
           dark
           icon
         >
-          <v-icon size="24px">{{ icon }}</v-icon>
+          <v-icon size="24px">{{ icon.icon }}</v-icon>
         </v-btn>
       </v-card-title>
 
@@ -105,12 +105,9 @@ export default {
   },
 
   data: () => ({
-    icons: [
-        'mdi-facebook',
-        'mdi-twitter',
-        'mdi-linkedin',
-        'mdi-instagram',
-      ],
+    icons: [{icon:'mdi-facebook', color: "rgb(66 103 178)"}, {icon:'mdi-linkedin', color:"rgb(66 103 178)"}, {icon:'mdi-instagram', color:"rgb(66 103 178)"}
+      
+    ],
   }),
 };
 </script>

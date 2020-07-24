@@ -13,7 +13,7 @@
                         <v-btn class="mx-2 facebook" fab color="rgb(66 103 178)" 
                         href="https://www.facebook.com/Pigmentus"
                         >
-                          <v-icon color="white">fab fa-facebook-f</v-icon>
+                          <v-icon color="white">mdi-facebook</v-icon>
                         </v-btn>
                         <v-btn class="mx-2 instagram" fab color="black" 
                         href="https://www.instagram.com/pigmentus_pr/"
@@ -23,7 +23,7 @@
                         <v-btn class="mx-2" fab color="rgb(40,103,178)"
                         href="https://www.linkedin.com/in/axelcastro/"
                         >
-                          <v-icon color="white">fab fa-linkedin-in</v-icon>
+                          <v-icon color="white">mdi-linkedin</v-icon>
                         </v-btn>
                       </div>
                       
@@ -78,7 +78,7 @@
                         <v-btn class="mx-2 facebook" fab color="rgb(66 103 178)" 
                         href="https://www.facebook.com/Pigmentus"
                         >
-                          <v-icon color="white">fab fa-facebook-f</v-icon>
+                          <v-icon color="white">mdi-facebook</v-icon>
                         </v-btn>
                         <v-btn class="mx-2 instagram" fab color="black" 
                         href="https://www.instagram.com/pigmentus_pr/"
@@ -88,7 +88,7 @@
                         <v-btn class="mx-2" fab color="rgb(40,103,178)"
                         href="https://www.linkedin.com/in/axelcastro/"
                         >
-                          <v-icon color="white">fab fa-linkedin-in</v-icon>
+                          <v-icon color="white">mdi-linkedin</v-icon>
                         </v-btn>
                       </div>
                       <v-form>
