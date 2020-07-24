@@ -1,5 +1,4 @@
 <template>
-  <v-app>
     <v-content class="fill-height" fluid>
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="8">
@@ -9,19 +8,25 @@
                 <v-row>
                   <v-col cols="12" md="8">
                     <v-card-text class="mt-12">
-                      <h1 class="text-center display-2 textColor--text text--accent-3">Sign in to Pigmentus</h1>
+                      <h1 class="text-center display-2 textColor text--accent-3">Sign in to Pigmentus</h1>
                       <div class=text-center>
-                        <v-btn class="mx-2" fab color="black" outlined>
-                          <v-icon>mdi-facebook</v-icon>
+                        <v-btn class="mx-2 facebook" fab color="rgb(66 103 178)" 
+                        href="https://www.facebook.com/Pigmentus"
+                        >
+                          <v-icon color="white">fab fa-facebook-f</v-icon>
                         </v-btn>
-                        <v-btn class="mx-2" fab color="black" outlined>
-                          <v-icon>mdi-instagram</v-icon>
+                        <v-btn class="mx-2 instagram" fab color="black" 
+                        href="https://www.instagram.com/pigmentus_pr/"
+                        >
+                          <v-icon color="white">mdi-instagram</v-icon>
                         </v-btn>
-                        <v-btn class="mx-2" fab color="black" outlined>
-                          <v-icon>mdi-linkedin</v-icon>
+                        <v-btn class="mx-2" fab color="rgb(40,103,178)"
+                        href="https://www.linkedin.com/in/axelcastro/"
+                        >
+                          <v-icon color="white">fab fa-linkedin-in</v-icon>
                         </v-btn>
                       </div>
-                      <h4 class="text-center mlt-4">Ensure your email for registration</h4>
+                      
                       <v-form>
                         <v-text-field
                         label="Email"
@@ -41,7 +46,7 @@
                       <h3 class="text-center mt-3">Forget your password?</h3>
                     </v-card-text>
                     <div class="text-center mt-3">
-                      <v-btn rounded color="rgb(187, 162, 87) acent-3">SING IN</v-btn>
+                      <v-btn rounded color="rgb(187, 162, 87) ">SING IN</v-btn>
                     </div>
                   </v-col>
                   <v-col cols="12" md="4" class="goldColor accent-3">
@@ -50,7 +55,7 @@
                       <h5>Enter your personnel detail and start journey with us</h5>
                     </v-card-text>
                     <div class="text-center">
-                      <v-btn rounded outlined="" dark @click="step++">SIGN UP</v-btn>
+                      <v-btn rounded  dark @click="step++">SIGN UP</v-btn>
                     </div>
                   </v-col>
                 </v-row>
@@ -58,13 +63,62 @@
               <v-window-item :value="2">
                 <v-row class="fill-height">
                   <v-col cols="12" md="4" class="goldColor accent-3">
-                    <v-card-text class="white--text mt-12">
+                    <v-card-text class="mt-12">
                       <h1 class="text-center display-1">Welcome Back !</h1>
                       <h5>To keep connected us please login with your personnel info</h5>
                     </v-card-text>
                     <div class="text-center">
-                      <v-btn rounded outlined dark @click="step--">SIGN IN</v-btn>
+                      <v-btn rounded  dark @click="step--">SIGN IN</v-btn>
                     </div>
+                  </v-col>
+                  <v-col cols="12" md="8">
+                    <v-card-text class="mt-12">
+                      <h1 class="text-center display-2 textColor text--accent-3"> Create Account</h1>
+                      <div class="text-center ">
+                        <v-btn class="mx-2 facebook" fab color="rgb(66 103 178)" 
+                        href="https://www.facebook.com/Pigmentus"
+                        >
+                          <v-icon color="white">fab fa-facebook-f</v-icon>
+                        </v-btn>
+                        <v-btn class="mx-2 instagram" fab color="black" 
+                        href="https://www.instagram.com/pigmentus_pr/"
+                        >
+                          <v-icon color="white">mdi-instagram</v-icon>
+                        </v-btn>
+                        <v-btn class="mx-2" fab color="rgb(40,103,178)"
+                        href="https://www.linkedin.com/in/axelcastro/"
+                        >
+                          <v-icon color="white">fab fa-linkedin-in</v-icon>
+                        </v-btn>
+                      </div>
+                      <v-form>
+                        <v-text-field
+                        label="Email"
+                        name="Email"
+                        prepend-icon="mdi-email"
+                        color="rgb(187, 162, 87)"
+                        />
+                        <v-text-field
+                        id="Password"
+                        label="Password"
+                        name="Password"
+                        prepend-icon="mdi-lock"
+                        type="password"
+                        color="rgb(187, 162, 87)"
+                        />
+                        <v-text-field
+                        id="ConfirmPassword"
+                        label="Confirm Password"
+                        name="ConfirmPassword"
+                        prepend-icon="mdi-lock"
+                        type="password"
+                        color="rgb(187, 162, 87)"
+                        />
+                      </v-form>
+                      <div class="text-center mt-3">
+                        <v-btn rounded color="rgb(187, 162, 87) ">SING UP</v-btn>
+                      </div>
+                    </v-card-text>
                   </v-col>
                 </v-row>
               </v-window-item>
@@ -73,7 +127,6 @@
         </v-col>
       </v-row>
     </v-content>
-  </v-app>
 </template>
 <script>
 export default {
@@ -93,4 +146,16 @@ export default {
   .my-text-style >>> .v-text-field__slot input {
     color: rgb(187, 162, 87);
   }
+  .instagram {
+    background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );  
+    background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+    color:transparent; 
+    -webkit-background-clip: text;
+    background-clip: text;color: transparent;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); 
+    background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);    
+}
+.facebook{
+  background-color: rgb(66 103 178);
+}
 </style>

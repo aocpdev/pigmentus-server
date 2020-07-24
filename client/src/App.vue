@@ -66,7 +66,7 @@
       flat
       tile
     >
-      <v-card-title class="teal">
+      <v-card-title class="goldColor">
         <strong class="subheading">Get connected with us on social networks!</strong>
 
         <v-spacer></v-spacer>
@@ -114,3 +114,9 @@ export default {
   }),
 };
 </script>
+
+<style>
+  .goldColor {
+    background-color: rgb(187, 162, 87);
+  }
+</style>
