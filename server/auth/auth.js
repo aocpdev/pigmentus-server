@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const  { hasToken, updateToken } = require('../api/queries/auth');
+const  { hasToken, updateToken } = require('./queries/auth');
 
 require('dotenv').config();
 

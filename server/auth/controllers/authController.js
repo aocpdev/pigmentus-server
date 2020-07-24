@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { getUserByEmail, createUser, deleteUser, updateUser} = require('../api/queries/users');
-const { saveToken, hasToken, updateToken} = require('../api/queries/auth');
+const { getUserByEmail, createUser, deleteUser, updateUser} = require('../queries/users');
+const { saveToken, hasToken, updateToken} = require('../queries/auth');
 
 require('dotenv').config();
 
