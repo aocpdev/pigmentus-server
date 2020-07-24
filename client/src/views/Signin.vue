@@ -78,7 +78,7 @@
                         <v-btn class="mx-2 facebook" fab color="rgb(66 103 178)" 
                         href="https://www.facebook.com/Pigmentus"
                         >
-                          <v-icon color="white">fab fa-facebook-f</v-icon>
+                          <v-icon color="white">fab mdi-facebook</v-icon>
                         </v-btn>
                         <v-btn class="mx-2 instagram" fab color="black" 
                         href="https://www.instagram.com/pigmentus_pr/"
