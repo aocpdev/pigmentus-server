@@ -13,7 +13,6 @@
       </div>
 
       <v-spacer></v-spacer>
-
         <v-btn
           to="/categories"
           class="ma-2"
@@ -27,6 +26,7 @@
           label="Search"
           filled
           append-icon="mdi-card-search-outline"
+          color="rgb(187, 162, 87)"
         ></v-text-field>
 
       <v-spacer></v-spacer>
@@ -48,6 +48,44 @@
       >
         Sign In
       </v-btn>
+      
+      
+      <div class="d-flex justify-center align-center">
+        <v-menu
+          offset-y
+        >
+          <template v-slot:activator="{ attrs, on }">
+            <v-btn class="mx-2" fab v-bind="attrs" v-on="on" outlined color="rgb(187, 162, 87)">
+              <v-badge overlap color="red">
+                <template v-slot:badge>
+                  <span>3</span>
+                </template>
+
+                <v-avatar>
+                  <img
+                    src="https://cdn.vuetifyjs.com/images/john.jpg"
+                    alt="John"
+                  >
+                </v-avatar>
+              </v-badge>
+          </v-btn>
+            
+          </template>
+
+          <v-list>
+            
+            <v-list-item
+              v-for="item in profileItems"
+              :key="item.name"
+              link
+            >
+              
+              <v-list-item-title v-text="item.name"></v-list-item-title>
+            </v-list-item>
+            
+          </v-list>
+        </v-menu>
+      </div>
     </v-app-bar>
 
     
@@ -73,7 +111,7 @@
 
         <v-btn
           v-for="icon in icons"
-          :key="icon"
+          :key="icon.icon"
           class="mx-4"
           dark
           icon
@@ -108,6 +146,14 @@ export default {
     icons: [{icon:'mdi-facebook', color: "rgb(66 103 178)"}, {icon:'mdi-linkedin', color:"rgb(66 103 178)"}, {icon:'mdi-instagram', color:"rgb(66 103 178)"}
       
     ],
+    profileItems: [
+      {name: "My Courses", to: ''},
+      {name: "My Cart", to: ''},
+      {name: "Wishlist", to: ''},
+      {name: "Help", to: ''},
+      {name: "Log Out", to: ''},
+    ],
+    
   }),
 };
 </script>
@@ -115,5 +161,9 @@ export default {
 <style>
   .goldColor {
     background-color: rgb(187, 162, 87);
+  }
+
+  .v-btn--active .v-btn__content {
+    color: rgb(187, 162, 87);
   }
 </style>

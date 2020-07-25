@@ -17,23 +17,23 @@ Vue.use(VueRouter)
   },
   {
     path: '/signup',
-    name: 'signup',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue')
+    name: 'Signup',
+    component: () => import(/* webpackChunkName: "signup" */ '../views/Signup.vue')
   },
   {
     path: '/signin',
-    name: 'signin',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Signin.vue')
+    name: 'Signin',
+    component: () => import(/* webpackChunkName: "signin" */ '../views/Signin.vue')
   },
   {
     path: '/cart',
     name: 'cart',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Cart.vue')
+    component: () => import(/* webpackChunkName: "cart" */ '../views/Cart.vue')
   },
   {
     path: '/categories',
     name: 'categories',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Categories.vue')
+    component: () => import(/* webpackChunkName: "categories" */ '../views/Categories.vue')
   }
 ]
 
