@@ -25,15 +25,28 @@
                         <v-icon color="white">mdi-linkedin</v-icon>
                       </v-btn>
                     </div>
-                    
+                    <div style="padding-top: 20px" v-if="error">
+                      <v-alert
+                      text
+                      v-model="error"
+                      dismissible
+                      close-icon="mdi-close"
+                      icon="mdi-lock"
+                      type="error"
+                    >
+                       {{errorMessage}}
+                    </v-alert>
+                    </div>
                     <v-form>
                       <v-text-field
+                      v-model="user.email"
                       label="Email"
                       name="Email"
                       prepend-icon="mdi-email"
                       color="rgb(187, 162, 87)"
                       />
                       <v-text-field
+                      v-model="user.password"
                       id="Password"
                       label="Password"
                       name="Password"
@@ -45,7 +58,7 @@
                     <h3 class="text-center mt-3">Forget your password?</h3>
                   </v-card-text>
                   <div class="text-center mt-3">
-                    <v-btn rounded color="rgb(187, 162, 87) ">SING IN</v-btn>
+                    <v-btn rounded color="rgb(187, 162, 87)" @click="login()">SING IN</v-btn>
                   </div>
                 </v-col>
                 <v-col cols="12" md="4" class="goldColor accent-3">
@@ -66,11 +79,34 @@
 </template>
 <script>
 import router from '../router/index'
+import {mapMutations, mapState} from 'vuex'
 export default {
   data: () => ({
-    step: 1
+    user: {},
+    error: false, 
+    errorMessage: ''
   }),
   methods: {
+    ...mapMutations(['changeLoginStatus']),
+    getCookie () {
+      console.log(this.$cookie.get('data.token') );
+    },
+    login() {
+      this.axios.post('/auth/signin', this.user)
+        .then(res => {
+          this.changeLoginStatus(true);
+          this.getCookie();
+          
+        })
+        .catch(err => {
+          this.error = false;
+          if (err.response.data.message === "Invalid user or password"){
+            this.user = {}
+            this.error = true;
+            this.errorMessage = err.response.data.message + '.'
+          }
+        });
+    },
     goSignup () {
       router.push({ name: "Signup"});
     }

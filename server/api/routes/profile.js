@@ -8,7 +8,7 @@ router.get('/', verifyAuth, async (req, res) => {
     try {
         const response = await getUsers();
         res.status(200).json(response.rows);
-    } catch (error){
+    } catch (error) {
         return res.status(500).json({
             message: "Error Ocurred",
             error

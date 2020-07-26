@@ -38,19 +38,31 @@
         to="/signup"
         class="ma-2"
         color="black"
+        v-if="!$store.state.isLogin"
       >
         Sign Up
       </v-btn>
         <v-btn
-        to="/signin"
+        to="/auth/signin"
         class="ma-2"
         color="black"
+        v-if="!$store.state.isLogin"
       >
         Sign In
       </v-btn>
+
+      <v-btn
+        to="/cursos"
+        class="ma-2"
+        color="black"
+        v-if="$store.state.isLogin"
+      >
+        My Course
+      </v-btn>
       
       
-      <div class="d-flex justify-center align-center">
+      
+      <div class="d-flex justify-center align-center" v-if="$store.state.isLogin">
         <v-menu
           offset-y
         >
@@ -71,19 +83,44 @@
           </v-btn>
             
           </template>
-
+          <v-card
+            class="mx-auto"
+            width="280"
+            tile
+          >
           <v-list>
-            
-            <v-list-item
-              v-for="item in profileItems"
-              :key="item.name"
-              link
-            >
-              
-              <v-list-item-title v-text="item.name"></v-list-item-title>
+            <v-list-item>
+              <v-list-item-avatar>
+                <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title class="title">John Lejkjkjhkjhjhkider</v-list-item-title>
+                <v-list-item-subtitle>john@vuetifyjs.com</v-list-item-subtitle>
+              </v-list-item-content>
             </v-list-item>
-            
           </v-list>
+          <v-divider></v-divider>
+          <v-list
+            nav
+            dense
+          >
+            <v-list-item-group  color="rgb(187, 162, 87)">
+              <v-list-item
+                v-for="(item, i) in profileItems"
+                :key="i"
+                color="rgb(187, 162, 87)"
+              >
+                <v-list-item-icon>
+                  <v-icon v-text="item.icon"></v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.name"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+          </v-card>
         </v-menu>
       </div>
     </v-app-bar>
@@ -133,8 +170,7 @@
 </template>
 
 <script>
-
-
+import {mapState} from 'vuex'
 export default {
   name: 'App',
 
@@ -144,16 +180,15 @@ export default {
 
   data: () => ({
     icons: [{icon:'mdi-facebook', color: "rgb(66 103 178)"}, {icon:'mdi-linkedin', color:"rgb(66 103 178)"}, {icon:'mdi-instagram', color:"rgb(66 103 178)"}
-      
     ],
     profileItems: [
-      {name: "My Courses", to: ''},
-      {name: "My Cart", to: ''},
-      {name: "Wishlist", to: ''},
-      {name: "Help", to: ''},
-      {name: "Log Out", to: ''},
+      {name: "Profile", to: '', icon: "mdi-account"},
+      {name: "My Courses", to: '', icon: "mdi-school"},
+      {name: "My Cart", to: '', icon: "mdi-cart"},
+      {name: "Wishlist", to: '', icon: "mdi-view-list"},
+      {name: "Help", to: '', icon: "mdi-help-box"},
+      {name: "Log Out", to: '', icon: "mdi-logout"},
     ],
-    
   }),
 };
 </script>

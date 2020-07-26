@@ -6,9 +6,13 @@ import Bootstrap from 'bootstrap-vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import vuetify from '@/plugins/vuetify'
+import VueCookie from 'vue-cookie'
 
+require('dotenv').config();
 Vue.use(VueAxios, axios, vuetify)
 Vue.use(Bootstrap)
+Vue.use(VueCookie)
+
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -19,10 +23,12 @@ Vue.config.productionTip = false
 // API URL
 if (process.env.NODE_ENV === 'production') {
   axios.defaults.baseURL = 'https://pigmentus.herokuapp.com'; // Production
-}else {
+// }else {
   axios.defaults.baseURL = 'http://localhost:3000/'; // Local
   
 }
+
+
 
 
 new Vue({
