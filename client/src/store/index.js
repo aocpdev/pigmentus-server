@@ -11,6 +11,12 @@ export default new Vuex.Store({
   mutations: {
     changeLoginStatus(state, isLogin){
         state.isLogin = isLogin;
+    },
+    getUser(state, userDecode) {
+      console.log(userDecode);
+      state.user.name = userDecode.name;
+      state.user.lastName = userDecode.last_name;
+      state.user.email = userDecode.email;
     }
   },
   actions: {

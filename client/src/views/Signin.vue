@@ -78,8 +78,8 @@
     </v-row>
 </template>
 <script>
-import router from '../router/index'
 import {mapMutations, mapState} from 'vuex'
+import decode from 'jwt-decode';
 export default {
   data: () => ({
     user: {},
@@ -87,16 +87,13 @@ export default {
     errorMessage: ''
   }),
   methods: {
-    ...mapMutations(['changeLoginStatus']),
-    getCookie () {
-      console.log(this.$cookie.get('data.token') );
-    },
+    ...mapMutations(['changeLoginStatus', 'getUser']),
     login() {
       this.axios.post('/auth/signin', this.user)
         .then(res => {
           this.changeLoginStatus(true);
-          this.getCookie();
-          
+          let userDecode = decode(res.data);
+          this.getUser(userDecode.data);
         })
         .catch(err => {
           this.error = false;
