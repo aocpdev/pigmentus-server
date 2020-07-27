@@ -13,7 +13,6 @@ export default new Vuex.Store({
         state.isLogin = isLogin;
     },
     getUser(state, userDecode) {
-      console.log(userDecode);
       state.user.name = userDecode.name;
       state.user.lastName = userDecode.last_name;
       state.user.email = userDecode.email;
