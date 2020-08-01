@@ -1,6 +1,9 @@
 <template>
+
   <v-app>
-    <v-app-bar app color="black" dark>
+    <loading></loading>
+    
+    <v-app-bar app color="black" dark v-if="!$store.state.isLoading">
       <div class="d-flex align-center">
         <v-img
           alt="Pigmentus Logo"
@@ -94,7 +97,7 @@
                 <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title class="title">{{$store.state.user.name}}</v-list-item-title>
+                <v-list-item-title class="title">{{$store.state.user.name}} {{$store.state.user.last_name}}</v-list-item-title>
                 <v-list-item-subtitle>{{$store.state.user.email}}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -125,16 +128,17 @@
       </div>
     </v-app-bar>
 
-    
-
     <v-main>
-      <router-view/>
+      <v-container fluid>
+        <router-view/>
+      </v-container>
     </v-main>
 
 
   <v-footer
     dark
     padless
+    v-if="!$store.state.isLoading"
   >
     <v-card
       class="flex"
@@ -170,12 +174,13 @@
 </template>
 
 <script>
+import Loading from '@/components/Loading.vue'
 import {mapState} from 'vuex'
 export default {
   name: 'App',
 
   components: {
-    
+    Loading
   },
 
   data: () => ({

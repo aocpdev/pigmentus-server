@@ -1,11 +1,16 @@
-import Router from 'express';
+const Router = require('express');
+const verifyAuth = require('../../auth/auth');
 
 // Router
 const router = Router();
 
 // Get Routes
-router.get('/', async (req, res) => {
-    res.send('Welcome to Pigmentus Api');
-});
+// router.get('/', async (req, res) => {
+    
+// });
+
+router.get('/home', verifyAuth, async(req, res) => {
+    console.log(res);
+})
 
 module.exports = router;

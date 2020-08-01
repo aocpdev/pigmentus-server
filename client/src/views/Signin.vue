@@ -79,7 +79,7 @@
 </template>
 <script>
 import {mapMutations, mapState} from 'vuex'
-import decode from 'jwt-decode';
+import router from '../router/index'
 export default {
   data: () => ({
     user: {},
@@ -92,11 +92,12 @@ export default {
       this.axios.post('/auth/signin', this.user)
         .then(res => {
           this.changeLoginStatus(true);
-          let userDecode = decode(res.data);
-          this.getUser(userDecode.data);
+          this.getUser(res.data);
+          router.push('/home')
         })
         .catch(err => {
           this.error = false;
+          console.log(err)
           if (err.response.data.message === "Invalid user or password"){
             this.user = {}
             this.error = true;

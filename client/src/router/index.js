@@ -1,20 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '../store/index'
+import axios from 'axios'
 
 Vue.use(VueRouter)
 
   const routes = [
+    {
+      path: '/',
+      name: 'Homee',
+      component: Home
+    },
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {requireAuth: true}
   },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
+  // {
+  //   path: '/home',
+  //   name: 'Home',
+  //   component: Home
+  // },
   {
     path: '/signup',
     name: 'Signup',
@@ -41,6 +49,33 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  
+  const authRoute = to.matched.some(record => record.meta.requireAuth)
+
+  if (authRoute) {
+    axios.get(to.fullPath)
+      .then(res => {
+        console.log(res);
+      })
+  }
+  console.log(store.state.user)
+  if (authRoute && Object.keys(store.state.user).length === 0) {
+    store.state.isLogin = false;
+    next({name: 'Signin'})
+  
+  } else {
+    
+    next()
+
+  }
+  if(authRoute && Object.keys(store.state.user).length > 0) {
+    store.state.isLogin = true;
+  }
+
+  
 })
 
 export default router

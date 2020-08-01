@@ -1,17 +1,34 @@
 <template>
-   <v-row justify="center">
-      <h1>Este es el home aqui podrian ir los videos o categorias, de verdad no se.</h1>
+  <v-row justify="center">
+      <h1>Welcome to Pigmentus Home.</h1>
   </v-row>
 </template>
-
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Home from '@/components/Home.vue'
 
 export default {
-  name: 'Home',
+  name: 'App',
   components: {
-    HelloWorld
-  }
+    Home
+  },
+  data: () => ({
+
+  }),
+  mounted(){
+    
+  },
+  methods: {
+    verifyAuth: function() {
+      this.axios.get('/home')
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+
+    }
+  },
 }
 </script>
