@@ -37,12 +37,12 @@ exports.user_login = (req, res, next) => {
                                         if (userToken.rows.length > 0) {
                                             updateToken(authToken)
                                                 .then(authInfo => {
-                                                    res.status(200).cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send(token);
+                                                    res.cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send(token);
                                                 }).catch(err => res.status(401).json({ err }));
                                         } else {
                                             saveToken(authToken)
                                                 .then(authInfo => {
-                                                    res.status(200).cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send();
+                                                    res.cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send();
                                                 }).catch(err => res.status(401).json({ err }));
                                         }
                                     }).catch(err => res.status(401).json({ err, message: 'por que esta aqui'}));
