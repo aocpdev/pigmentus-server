@@ -16,7 +16,6 @@ Vue.use(VueRouter)
     path: '/home',
     name: 'Home',
     component: Home,
-    meta: {requireAuth: true}
   },
   // {
   //   path: '/home',
@@ -52,7 +51,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  
+
   const authRoute = to.matched.some(record => record.meta.requireAuth)
 
   if (authRoute) {
@@ -65,9 +64,9 @@ router.beforeEach((to, from, next) => {
   if (authRoute && Object.keys(store.state.user).length === 0) {
     store.state.isLogin = false;
     next({name: 'Signin'})
-  
+
   } else {
-    
+
     next()
 
   }
@@ -75,7 +74,7 @@ router.beforeEach((to, from, next) => {
     store.state.isLogin = true;
   }
 
-  
+
 })
 
 export default router

@@ -25,7 +25,7 @@ Vue.config.productionTip = false
   axios.defaults.baseURL = 'https://pigmentus.herokuapp.com'; // Production
 // }else {
   // axios.defaults.baseURL = 'http://localhost:3000/'; // Local
-  
+
 // }
 
 

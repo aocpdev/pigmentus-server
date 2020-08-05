@@ -6,7 +6,7 @@ require('dotenv').config();
 const verifyAuth = (req, res, next) => {
 
   // Leer headers
-  const token = req.get('token');
+  const token = req.cookies.token;
 
   jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
 
@@ -31,7 +31,7 @@ const verifyAuth = (req, res, next) => {
 
             updateToken(authInfo)
               .then(authInfoUpdate => {
-                res.status(200).cookie('token', token, { maxAge: 43200, httpOnly: true, path: '/home'}).send().json({message: 'Cookie change'});
+                res.status(200).cookie('token', token, { maxAge: 43200, httpOnly: true, path:'/'}).send().json({message: 'Cookie change'});
                 next();
               }).catch(err => { err });
 

@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const history = require('connect-history-api-fallback');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
 
@@ -12,6 +13,7 @@ const app = express();
 
 
 // Midlewares
+app.use(cookieParser())
 app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json());
@@ -19,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Express Session
 app.use(session({
-    secret: process.env.JWT_KEY, 
+    secret: process.env.JWT_KEY,
     resave: false,
     saveUninitialized: false
 }))
