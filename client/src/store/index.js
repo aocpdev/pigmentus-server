@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import decode from 'jwt-decode'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -8,7 +8,6 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     isLoading: true,
-    token: '',
     user: ''
   },
   mutations: {
@@ -18,18 +17,29 @@ export default new Vuex.Store({
     changeLoginStatus(state, isLogin){
         state.isLogin = isLogin;
     },
-    getUser(state, payload) {
-      state.token = payload
-      if(payload === '') {
+    setUser(state, user) {
+
+      if(user === undefined) {
         state.user = ''
+        state.isLogin = false;
       } else {
-        let user = decode(payload);
-        state.user = user.data;
+        state.isLogin = true;
+        state.user= user;
       }
     }
   },
   actions: {
-    
+    isAuth: async function ({commit}) {
+      axios.get('http://pigmentus.herokuapp.com/auth')
+        .then(user => {
+          if (user.data.user === '') {
+            state.user = "";
+          }else {
+            commit('setUser', user.data.user)
+          }
+        })
+        .catch(err => console.log(err))
+    }
   },
   modules: {
   }

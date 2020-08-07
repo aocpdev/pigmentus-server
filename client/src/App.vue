@@ -55,7 +55,7 @@
       </v-btn>
 
       <v-btn
-        to="/cursos"
+        to="/courses"
         class="ma-2"
         color="black"
         v-if="$store.state.isLogin"
@@ -97,7 +97,7 @@
                 <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title class="title">{{$store.state.user.name}} {{$store.state.user.last_name}}</v-list-item-title>
+                <v-list-item-title class="title">{{$store.state.user.name}} {{$store.state.user.lastName}}</v-list-item-title>
                 <v-list-item-subtitle>{{$store.state.user.email}}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -109,9 +109,10 @@
           >
             <v-list-item-group  color="rgb(187, 162, 87)">
               <v-list-item
-                v-for="(item, i) in profileItems"
+                v-for="(item, i) in items"
                 :key="i"
                 color="rgb(187, 162, 87)"
+                :to="item.to"
               >
                 <v-list-item-icon>
                   <v-icon v-text="item.icon"></v-icon>
@@ -175,7 +176,7 @@
 
 <script>
 import Loading from '@/components/Loading.vue'
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 export default {
   name: 'App',
 
@@ -186,8 +187,8 @@ export default {
   data: () => ({
     icons: [{icon:'mdi-facebook', color: "rgb(66 103 178)"}, {icon:'mdi-linkedin', color:"rgb(66 103 178)"}, {icon:'mdi-instagram', color:"rgb(66 103 178)"}
     ],
-    profileItems: [
-      {name: "Profile", to: '', icon: "mdi-account"},
+    items: [
+      {name: "Profile", to: '/profile', icon: "mdi-account"},
       {name: "My Courses", to: '', icon: "mdi-school"},
       {name: "My Cart", to: '', icon: "mdi-cart"},
       {name: "Wishlist", to: '', icon: "mdi-view-list"},
@@ -195,6 +196,12 @@ export default {
       {name: "Log Out", to: '', icon: "mdi-logout"},
     ],
   }),
+  methods: {
+    ...mapActions(['isAuth'])
+  },
+  created() {
+    this.isAuth();
+  },
 };
 </script>
 

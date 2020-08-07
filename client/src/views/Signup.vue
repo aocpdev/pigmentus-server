@@ -135,14 +135,12 @@ export default {
         },
         createUser() {
             this.user.enable = true;
-            console.log(this.user);
             this.axios.post('/auth/signup', this.user)
                 .then(res => {
                     if (res.data.message === "User added succesfully"){
                       let userLogin = {email: this.user.email, password: this.user.password1}
                       this.axios.post('/auth/login', userLogin)
                         .then(res => {
-                          console.log(res)
                           // router.push({name: "Home"})
                         })
                         .catch(err => {

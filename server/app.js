@@ -29,7 +29,7 @@ app.use(session({
 // Routes
 app.use('/', require('./api/routes/index'));
 app.use('/auth', require('./auth/routes/auth'));
-app.use('/profile', require('./api/routes/profile'));
+// app.use('/profile', require('./api/routes/profile'));
 
  // Middleware for Vue.js router mode history
 app.use(history());

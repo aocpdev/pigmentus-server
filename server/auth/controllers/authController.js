@@ -6,7 +6,7 @@ const { saveToken, hasToken, updateToken } = require('../queries/auth');
 require('dotenv').config();
 
 
-exports.user_login = (req, res, next) => {
+exports.userSignin = (req, res, next) => {
 
     const email = req.body.email;
     const password = req.body.password;
@@ -29,7 +29,7 @@ exports.user_login = (req, res, next) => {
                                 let user = response.rows[0];
 
                                 let token = jwt.sign({ data: user }, process.env.JWT_KEY, { expiresIn: '12h' });
-
+                                
                                 hasToken(user.id)
                                     .then(userToken => {
                                         let authToken = { token: token, issued_date: new Date(), id: user.id };
@@ -37,7 +37,7 @@ exports.user_login = (req, res, next) => {
                                         if (userToken.rows.length > 0) {
                                             updateToken(authToken)
                                                 .then(authInfo => {
-                                                    res.cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send(token);
+                                                    res.cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send(user);
                                                 }).catch(err => res.status(401).json({ err }));
                                         } else {
                                             saveToken(authToken)
@@ -62,7 +62,7 @@ exports.user_login = (req, res, next) => {
     }
 }
 
-exports.user_signup = (req, res, next) => {
+exports.userSignup = (req, res, next) => {
 
     try {
 
@@ -129,7 +129,7 @@ exports.user_signup = (req, res, next) => {
     }
 }
 
-exports.user_delete = (req, res, next) => {
+exports.userDelete = (req, res, next) => {
 
     try {
         const id = req.params.id;
@@ -147,7 +147,7 @@ exports.user_delete = (req, res, next) => {
     }
 }
 
-exports.user_update = (req, res, next) => {
+exports.userUpdate = (req, res, next) => {
     try {
         const id = req.params.id;
         const enable = true;
@@ -167,4 +167,27 @@ exports.user_update = (req, res, next) => {
             error
         });
     }
+}
+
+exports.userIsAuth = (req, res, next) => {
+    const token = req.cookies.token;
+    jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
+
+        if (err) {
+    
+          return res.status(401).json({
+            mensaje: 'Error de token',
+            err
+          })
+        } else {
+            const user = {
+              id: decoded.data.id,
+              name: decoded.data.name, 
+              lastName: decoded.data.last_name,
+              email: decoded.data.email,
+              preferences: decoded.data.preferences
+            }
+            res.status(200).json({user: user})
+        }
+    });
 }

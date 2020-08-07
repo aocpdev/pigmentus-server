@@ -87,17 +87,16 @@ export default {
     errorMessage: ''
   }),
   methods: {
-    ...mapMutations(['changeLoginStatus', 'getUser']),
+    ...mapMutations(['changeLoginStatus', 'setUser']),
     login() {
       this.axios.post('/auth/signin', this.user)
         .then(res => {
           this.changeLoginStatus(true);
-          this.getUser(res.data);
-          router.push('/home')
+          this.setUser(res);
+          router.push('/')
         })
         .catch(err => {
           this.error = false;
-          console.log(err)
           if (err.response.data.message === "Invalid user or password"){
             this.user = {}
             this.error = true;

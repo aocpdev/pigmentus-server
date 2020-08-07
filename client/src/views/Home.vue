@@ -1,34 +1,19 @@
 <template>
   <v-row justify="center">
-      <h1>Welcome to Pigmentus Home.</h1>
+      <h1>Welcome to home {{$store.state.user.name}} {{$store.state.user.lastName}}.</h1>
   </v-row>
 </template>
 <script>
 // @ is an alias to /src
 import Home from '@/components/Home.vue'
-
+import {mapState} from 'vuex'
 export default {
-  name: 'App',
+  name: 'HomeView',
   components: {
     Home
   },
   data: () => ({
 
   }),
-  mounted(){
-    
-  },
-  methods: {
-    verifyAuth: function() {
-      this.axios.get('/home')
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-        })
-
-    }
-  },
 }
 </script>

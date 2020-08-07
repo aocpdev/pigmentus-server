@@ -4,16 +4,10 @@ const verifyAuth = require('../../auth/auth');
 
 const router = Router();
 
-router.get('/', verifyAuth, async (req, res) => {
-    try {
-        const response = await getUsers();
-        res.status(200).json(response.rows);
-    } catch (error) {
-        return res.status(500).json({
-            message: "Error Ocurred",
-            error
-        });
-    }
+router.get('/', async (req, res) => {
+    
+    return await res.status(200);
+    
 });
 
 module.exports = router;
