@@ -1,6 +1,10 @@
 const { getCourses, saveCourse} = require('../queries/courses')
 
 exports.getCourses = (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true);
     try {
         getCourses().then( courses => {
             res.status(200).json({courses: courses})
@@ -14,6 +18,10 @@ exports.getCourses = (req, res, next) => {
 }
 
 exports.saveCourse = (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true);
     try {
 
         saveCourse(req.body)

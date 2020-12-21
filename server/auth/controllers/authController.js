@@ -7,6 +7,10 @@ require('dotenv').config();
 
 
 exports.userSignin = (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true);
 
     const email = req.body.email;
     const password = req.body.password;
@@ -76,7 +80,10 @@ exports.userSignin = (req, res, next) => {
 }
 
 exports.userSignup = (req, res, next) => {
-
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true);
     try {
 
         const { name, last_name, email, password1, password2, preferences, created_date, last_modified_date, last_seen, enable } = req.body;
@@ -143,6 +150,10 @@ exports.userSignup = (req, res, next) => {
 }
 
 exports.userDelete = (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true);
 
     try {
         const id = req.params.id;
@@ -161,6 +172,10 @@ exports.userDelete = (req, res, next) => {
 }
 
 exports.userUpdate = (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true);
     try {
         const id = req.params.id;
         const enable = true;
@@ -183,6 +198,10 @@ exports.userUpdate = (req, res, next) => {
 }
 
 exports.userIsAuth = (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,contenttype'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true);
     const token = req.cookies.token;
     jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
 
