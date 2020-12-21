@@ -9,12 +9,12 @@
                   <v-card-text class="mt-12">
                     <h1 class="text-center display-2 textColor text--accent-3">Sign in to Pigmentus</h1>
                     <div class=text-center>
-                      <v-btn class="mx-2 facebook" fab color="rgb(66 103 178)" 
+                      <v-btn class="mx-2 facebook" fab color="rgb(66 103 178)"
                       href="https://www.facebook.com/Pigmentus"
                       >
                         <v-icon color="white">mdi-facebook</v-icon>
                       </v-btn>
-                      <v-btn class="mx-2 instagram" fab color="black" 
+                      <v-btn class="mx-2 instagram" fab color="black"
                       href="https://www.instagram.com/pigmentus_pr/"
                       >
                         <v-icon color="white">mdi-instagram</v-icon>
@@ -83,17 +83,24 @@ import router from '../router/index'
 export default {
   data: () => ({
     user: {},
-    error: false, 
+    error: false,
     errorMessage: ''
   }),
   methods: {
-    ...mapMutations(['changeLoginStatus', 'setUser']),
+    ...mapMutations(['changeLoginStatus', 'setUser', 'isAuth']),
     login() {
-      this.axios.post('/auth/signin', this.user)
+      this.axios.post('/api/v1.0/auth/signin', this.user)
         .then(res => {
           this.changeLoginStatus(true);
-          this.setUser(res);
-          router.push('/')
+          let user = {
+            id: res.data.id,
+            name: res.data.name,
+            lastName: res.data.lastName,
+            email: res.data.email,
+            preferences: res.data.preferences
+          }
+          this.setUser(user );
+          router.push('/');
         })
         .catch(err => {
           this.error = false;
@@ -122,13 +129,13 @@ export default {
     color: rgb(187, 162, 87);
   }
   .instagram {
-    background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );  
+    background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
     background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
-    color:transparent; 
+    color:transparent;
     -webkit-background-clip: text;
     background-clip: text;color: transparent;
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); 
-    background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);    
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
 }
 .facebook{
   background-color: rgb(66 103 178);

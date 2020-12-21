@@ -4,9 +4,14 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && cpx \"dist/**/*.{html,png,jpg,css,js,ico,map}\" ../server/public"
+    "build": "vue-cli-service build && cpx \"dist/**/*.{html,png,jpg,css,js,ico,map,svg}\" ../server/public"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-brands-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/vue-fontawesome": "^2.0.0",
+    "animate.css": "^4.1.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.15.0",
@@ -18,6 +23,7 @@
     "vue-axios": "^2.1.5",
     "vue-cookie": "^1.1.4",
     "vue-cookies": "^1.7.3",
+    "vue-core-video-player": "^0.2.0",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
     "vuex": "^3.4.0"

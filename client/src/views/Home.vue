@@ -1,7 +1,5 @@
 <template>
-  <v-row justify="center">
-      <h1>Welcome to home {{$store.state.user.name}} {{$store.state.user.lastName}}.</h1>
-  </v-row>
+  <home/>
 </template>
 <script>
 // @ is an alias to /src

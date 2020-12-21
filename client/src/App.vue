@@ -2,7 +2,7 @@
 
   <v-app>
     <loading></loading>
-    
+
     <v-app-bar app color="black" dark v-if="!$store.state.isLoading">
       <div class="d-flex align-center">
         <v-img
@@ -16,55 +16,78 @@
       </div>
 
       <v-spacer></v-spacer>
-        <v-btn
-          to="/categories"
-          class="ma-2"
-          color="black"
-        >
-        Categories
-        </v-btn>
-        <v-text-field
-          style="margin-top: 30px"
-          outlined
-          label="Search"
-          filled
-          append-icon="mdi-card-search-outline"
-          color="rgb(187, 162, 87)"
-        ></v-text-field>
+
+
 
       <v-spacer></v-spacer>
 
-      <v-btn class="ma-2" tile large color="white" icon to="/cart">
+      <v-btn
+        to="/collections"
+        class="ma-2"
+        color="white"
+        text
+      >
+        Shop
+      </v-btn>
+      <v-btn
+        to="/"
+        class="ma-2"
+        color="white"
+        text
+      >
+        Cursos
+      </v-btn>
+      <v-btn
+        to="/admin"
+        class="ma-2"
+        color="white"
+        text
+      >
+        Admin
+      </v-btn>
+
+      <v-btn
+        to="/courses"
+        class="ma-2"
+        color="white"
+        v-if="$store.state.isLogin"
+        text
+      >
+        My Course
+      </v-btn>
+
+      <v-btn
+        class="ma-2"
+        tile
+        large
+        color="white"
+        icon to="/cart">
         <v-icon>mdi-cart</v-icon>
       </v-btn>
+
       <v-btn
         to="/signup"
         class="ma-2"
-        color="black"
+        color="white"
         v-if="!$store.state.isLogin"
+        text
       >
         Sign Up
       </v-btn>
         <v-btn
         to="/auth/signin"
         class="ma-2"
-        color="black"
+        color="white"
         v-if="!$store.state.isLogin"
+        text
       >
         Sign In
       </v-btn>
 
-      <v-btn
-        to="/courses"
-        class="ma-2"
-        color="black"
-        v-if="$store.state.isLogin"
-      >
-        My Course
-      </v-btn>
-      
-      
-      
+
+
+
+
       <div class="d-flex justify-center align-center" v-if="$store.state.isLogin">
         <v-menu
           offset-y
@@ -78,13 +101,13 @@
 
                 <v-avatar>
                   <img
-                    src="https://cdn.vuetifyjs.com/images/john.jpg"
+                    src="https://i1.sndcdn.com/avatars-000143584345-3qxowr-t500x500.jpg"
                     alt="John"
                   >
                 </v-avatar>
               </v-badge>
           </v-btn>
-            
+
           </template>
           <v-card
             class="mx-auto"
@@ -94,7 +117,7 @@
           <v-list>
             <v-list-item>
               <v-list-item-avatar>
-                <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+                <v-img src="https://i1.sndcdn.com/avatars-000143584345-3qxowr-t500x500.jpg"></v-img>
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="title">{{$store.state.user.name}} {{$store.state.user.lastName}}</v-list-item-title>
@@ -112,7 +135,8 @@
                 v-for="(item, i) in items"
                 :key="i"
                 color="rgb(187, 162, 87)"
-                :to="item.to"
+                :to="`${item.to}/${$store.state.user.id}/account`"
+
               >
                 <v-list-item-icon>
                   <v-icon v-text="item.icon"></v-icon>
@@ -130,9 +154,11 @@
     </v-app-bar>
 
     <v-main>
-      <v-container fluid>
+
+
         <router-view/>
-      </v-container>
+
+
     </v-main>
 
 
@@ -168,10 +194,10 @@
     </v-card>
   </v-footer>
 
-    
-    
+
+
   </v-app>
-  
+
 </template>
 
 <script>
@@ -189,8 +215,8 @@ export default {
     ],
     items: [
       {name: "Profile", to: '/profile', icon: "mdi-account"},
-      {name: "My Courses", to: '', icon: "mdi-school"},
-      {name: "My Cart", to: '', icon: "mdi-cart"},
+      {name: "My Courses", to: '/courses', icon: "mdi-school"},
+      {name: "My Cart", to: '/cart', icon: "mdi-cart"},
       {name: "Wishlist", to: '', icon: "mdi-view-list"},
       {name: "Help", to: '', icon: "mdi-help-box"},
       {name: "Log Out", to: '', icon: "mdi-logout"},

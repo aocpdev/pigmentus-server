@@ -18,12 +18,12 @@
                   <v-card-text class="mt-12">
                     <h1 class="text-center display-2 textColor text--accent-3"> Create Account</h1>
                     <div class="text-center ">
-                      <v-btn class="mx-2 facebook" fab color="rgb(66 103 178)" 
+                      <v-btn class="mx-2 facebook" fab color="rgb(66 103 178)"
                       href="https://www.facebook.com/Pigmentus"
                       >
                         <v-icon color="white">mdi-facebook</v-icon>
                       </v-btn>
-                      <v-btn class="mx-2 instagram" fab color="black" 
+                      <v-btn class="mx-2 instagram" fab color="black"
                       href="https://www.instagram.com/pigmentus_pr/"
                       >
                         <v-icon color="white">mdi-instagram</v-icon>
@@ -101,7 +101,7 @@
             </v-window-item>
           </v-window>
         </v-card>
-      </v-col>    
+      </v-col>
   </v-row>
 </template>
 
@@ -112,7 +112,7 @@ export default {
             error: false,
             valid: false,
             errorMessage: "",
-            user: {}, 
+            user: {},
             password2: '',
             nameRules: [
                 v => !!v || 'Name is required'
@@ -128,18 +128,18 @@ export default {
                 v => !!v || 'Password is required',
                 v => (v && v.length > 5) || 'Passwrd must be at least 6 characters',
             ]
-    }), 
+    }),
     methods: {
         goLogin () {
           router.push({ name: "Signin"});
         },
         createUser() {
             this.user.enable = true;
-            this.axios.post('/auth/signup', this.user)
+            this.axios.post('/api/v1.0/auth/signup', this.user)
                 .then(res => {
                     if (res.data.message === "User added succesfully"){
                       let userLogin = {email: this.user.email, password: this.user.password1}
-                      this.axios.post('/auth/login', userLogin)
+                      this.axios.post('/api/v1.0/auth/login', userLogin)
                         .then(res => {
                           // router.push({name: "Home"})
                         })
@@ -148,7 +148,7 @@ export default {
                         });
                     }
                 })
-                .catch(err => {  
+                .catch(err => {
                   this.error = false;
                     if (err.response.data.message === "User exist"){
                       this.user.email = "";
@@ -156,7 +156,7 @@ export default {
                       this.errorMessage = "This email is already registered, please choose another one."
                     }
                 })
-            
+
         }
     },
     computed: {
@@ -172,13 +172,13 @@ export default {
 
 <style>
 .instagram {
-  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );  
+  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
   background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
-  color:transparent; 
+  color:transparent;
   -webkit-background-clip: text;
   background-clip: text;color: transparent;
-  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); 
-  background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);    
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
 }
 .facebook{
   background-color: rgb(66 103 178);

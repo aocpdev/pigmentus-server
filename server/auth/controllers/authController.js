@@ -29,7 +29,7 @@ exports.userSignin = (req, res, next) => {
                                 let user = response.rows[0];
 
                                 let token = jwt.sign({ data: user }, process.env.JWT_KEY, { expiresIn: '12h' });
-                                
+
                                 hasToken(user.id)
                                     .then(userToken => {
                                         let authToken = { token: token, issued_date: new Date(), id: user.id };
@@ -37,12 +37,26 @@ exports.userSignin = (req, res, next) => {
                                         if (userToken.rows.length > 0) {
                                             updateToken(authToken)
                                                 .then(authInfo => {
-                                                    res.cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send(user);
+                                                    let userForClient = {
+                                                        id: user.id,
+                                                        name: user.name,
+                                                        lastName: user.last_name,
+                                                        email: user.email,
+                                                        preferences: user.preferences
+                                                    }
+                                                    res.cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send(userForClient);
                                                 }).catch(err => res.status(401).json({ err }));
                                         } else {
                                             saveToken(authToken)
                                                 .then(authInfo => {
-                                                    res.cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send();
+                                                    let userForClient = {
+                                                        id: user.id,
+                                                        name: user.name,
+                                                        lastName: user.last_name,
+                                                        email: user.email,
+                                                        preferences: user.preferences
+                                                    }
+                                                    res.cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send(userForClient);
                                                 }).catch(err => res.status(401).json({ err }));
                                         }
                                     }).catch(err => res.status(401).json({ err, message: 'por que esta aqui'}));
@@ -53,7 +67,6 @@ exports.userSignin = (req, res, next) => {
                             }
                         }).catch(err => { })
                 }
-
             })
     } catch (error) {
         res.status(500).json({
@@ -174,20 +187,20 @@ exports.userIsAuth = (req, res, next) => {
     jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
 
         if (err) {
-    
-          return res.status(401).json({
-            mensaje: 'Error de token',
-            err
-          })
-        } else {
-            const user = {
-              id: decoded.data.id,
-              name: decoded.data.name, 
-              lastName: decoded.data.last_name,
-              email: decoded.data.email,
-              preferences: decoded.data.preferences
-            }
-            res.status(200).json({user: user})
+
+        return res.status(401).json({
+        mensaje: 'Error de token',
+        err
+        })
+    } else {
+        const user = {
+            id: decoded.data.id,
+            name: decoded.data.name,
+            lastName: decoded.data.last_name,
+            email: decoded.data.email,
+            preferences: decoded.data.preferences
         }
+        res.status(200).json({user: user})
+    }
     });
 }
