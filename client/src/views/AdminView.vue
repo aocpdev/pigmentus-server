@@ -8,10 +8,14 @@
             cols="2"
             md="2"
         > -->
-        <v-row>
-            <v-card
+        <v-row no-gutters>
+            <v-col
+            cols="6"
+            md="2"
+            >
+                <v-card
             class="ma-0 pa-0"
-            width="320"
+            width="100vh"
             tile
             height="100vh"
         >
@@ -25,6 +29,7 @@
                 <v-list-item
                 v-for="(item, i) in items"
                 :key="i"
+                :to="item.route"
                 >
                 <v-list-item-icon>
                     <v-icon v-text="item.icon"></v-icon>
@@ -36,99 +41,17 @@
             </v-list-item-group>
             </v-list>
             </v-card>
-            <v-content class="pt-0" style="background-color: #F5F5F5">
-            <v-container fluid >
-                <!-- <router-view></router-view> -->
-                <div style="text-align: center;"><h1> Pigmentus Dashboard</h1></div>
+            </v-col>
 
-                <v-row>
-                    <v-col>
-                        <v-hover v-slot="{ hover }">
-                        <v-card
-                        :elevation="hover ? 12 : 2"
-                        max-width="280"
-                        shaped
-                        to="/collections/1/products"
-                        >
-                        <v-card-text>
-                            <v-row>
-                                <v-col class="pt-0 pb-0">
-                                    <p class="display-1 text--primary mb-0">
-                                        0
-                                    </p>
-                                    <div class="mt-0 pt-0">New Customers</div>
-                                </v-col>
-                                <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
-                                    <v-icon x-large color="rgb(187, 162, 87)">mdi-account</v-icon>
-                                </v-col>
-                            </v-row>
+            <v-col cols="12"
+            sm="8"
+            md="10"
+            style="background-color: #F5F5F5">
+                <v-main class="pt-0">
+                <router-view></router-view>
+            </v-main>
+            </v-col>
 
-
-                        </v-card-text>
-                        </v-card>
-                        </v-hover>
-                    </v-col>
-                <v-col>
-                    <v-hover v-slot="{ hover }">
-                <v-card
-                :elevation="hover ? 12 : 2"
-                max-width="280"
-                shaped
-                to="/collections/1/products"
-                >
-                <v-card-text>
-                    <v-row>
-                        <v-col class="pt-0 pb-0">
-                            <p class="display-1 text--primary mb-0">
-                                $0.00
-                            </p>
-                            <div class="mt-0 pt-0">Today Sales</div>
-                        </v-col>
-                        <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
-                            <v-icon x-large color="rgb(187, 162, 87)">mdi-currency-usd</v-icon>
-                        </v-col>
-                    </v-row>
-
-
-                </v-card-text>
-                </v-card>
-                </v-hover>
-                </v-col>
-
-                <v-col>
-                    <v-hover v-slot="{ hover }">
-                <v-card
-                :elevation="hover ? 12 : 2"
-                max-width="280"
-                shaped
-                to="/collections/1/products"
-                >
-                <v-card-text>
-                    <v-row>
-                        <v-col class="pt-0 pb-0">
-                            <p class="display-1 text--primary mb-0">
-                                0
-                            </p>
-                            <div class="mt-0 pt-0">Total Customers</div>
-                        </v-col>
-                        <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
-                            <v-icon x-large color="rgb(187, 162, 87)">mdi-account</v-icon>
-                        </v-col>
-                    </v-row>
-
-
-                </v-card-text>
-                </v-card>
-                </v-hover>
-                </v-col>
-                </v-row>
-
-
-
-
-
-            </v-container>
-            </v-content>
         </v-row>
 
 
@@ -159,10 +82,10 @@ export default {
     data: () => ({
     selectedItem: 1,
     items: [
-    { text: 'Dashboard', icon: 'mdi-view-dashboard' },
-    { text: 'Customers', icon: 'mdi-account' },
-    { text: 'Revenue', icon: 'mdi-currency-usd' },
-    { text: 'Products', icon: 'mdi-view-list' },
+    { text: 'Dashboard', icon: 'mdi-view-dashboard', route: '/admin/dashboard'},
+    { text: 'Customers', icon: 'mdi-account', route: '/admin/customers'},
+    { text: 'Revenue', icon: 'mdi-currency-usd', route: '' },
+    { text: 'Products', icon: 'mdi-view-list', route: '' },
     ],
     })
 }
@@ -185,6 +108,4 @@ export default {
         font-family: 'Fredericka the Great', cursive;
         width: 100%;
     }
-
-
 </style>

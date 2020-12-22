@@ -18,16 +18,6 @@ app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'DELETE, PUT');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        if ('OPTIONS' == req.method) {
-        res.sendStatus(200);
-        }
-        else {
-        next();
-        }});
 
 // Express Session
 app.use(session({
@@ -42,6 +32,7 @@ app.use('/api/v1.0/auth', require('./auth/routes/auth'));
 app.use('/api/v1.0/collections', require('./api/routes/collections'));
 app.use('/api/v1.0/courses', require('./api/routes/courses'));
 app.use('/api/v1.0/products', require('./api/routes/products'));
+app.use('/api/v1.0/users', require('./auth/routes/users'));
 // app.use('/profile', require('./api/routes/profile'));
 
  // Middleware for Vue.js router mode history

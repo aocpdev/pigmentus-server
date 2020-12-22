@@ -9,6 +9,9 @@ import Shop from '../components/Shop.vue'
 import PersonalInfo from '../components/PersonalInfo.vue'
 import Collections from '../components/Collections.vue'
 import Products from '../components/Products.vue'
+import Admin from '../views/AdminView.vue'
+import Dashboard from '../components/admin/Dashboard.vue'
+import Customers from '../components/admin/Customers.vue'
 
 
 
@@ -58,7 +61,12 @@ Vue.use(VueRouter)
   {
     path: '/admin',
     name: 'Admin',
-    component: () => import(/* webpackChunkName: "admin" */ '../views/AdminView.vue')
+    component: Admin,
+    redirect: {name: 'dashboard'},
+    children: [
+      { path: 'dashboard', name: 'dashboard', component: Dashboard},
+      { path: 'customers', name: 'customers', component: Customers},
+    ]
   },
 
   {
