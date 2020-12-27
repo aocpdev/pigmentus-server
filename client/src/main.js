@@ -22,9 +22,9 @@ Vue.config.productionTip = false
 
 // API URL
 // if (process.env.NODE_ENV === 'production') {
-  // axios.defaults.baseURL = 'http://pigmentus.herokuapp.com'; // Production
+  axios.defaults.baseURL = 'http://pigmentus.herokuapp.com'; // Production
 // }else {
-  axios.defaults.baseURL = 'http://localhost:3000'; // Local
+  // axios.defaults.baseURL = 'http://localhost:3000'; // Local
 
 // }
 
