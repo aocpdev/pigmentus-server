@@ -5,12 +5,13 @@ const getCollections = function () {
 }
 
 const saveCollection = function (collection) {
-    return pool.query('INSERT INTO collections (name, disabled, date_created, date_modified) VALUES ($1, $2, $3, $4)',
+    return pool.query('INSERT INTO collections (name, enabled, date_created, date_modified, description) VALUES ($1, $2, $3, $4, $5)',
     [
         collection.name,
-        collection.disabled,
+        collection.enabled,
         collection.dateCreated,
-        collection.dateModified
+        collection.dateModified,
+        collection.description
     ])
 }
 

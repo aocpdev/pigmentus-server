@@ -3,183 +3,199 @@
             <h1 style="text-align: center;"> Pigmentus Dashboard</h1>
 
             <v-col cols="12"
-        sm="6"
-        md="8">
-                <v-row no-gutters class="ml-5">
-                    <v-col>
-            <v-hover v-slot="{ hover }">
-            <v-card
-            :elevation="hover ? 12 : 2"
-            max-width="290"
-            shaped
-            to="/admin/customers"
+                sm="6"
+                md="8"
             >
-            <v-card-text>
-                <v-row>
-                    <v-col class="pt-0 pb-0">
-                        <p class="display-1 text--primary mb-0">
-                            0
-                        </p>
-                        <div class="mt-0 pt-0">New Customers</div>
-                    </v-col>
-                    <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
-                        <v-icon x-large color="rgb(187, 162, 87)">mdi-account</v-icon>
-                    </v-col>
-                </v-row>
+                <v-row no-gutters class="ml-5">
 
-
-            </v-card-text>
-            </v-card>
-            </v-hover>
-                    </v-col>
+                    <!-- New Customers -->
                     <v-col>
                         <v-hover v-slot="{ hover }">
-                    <v-card
-                    :elevation="hover ? 12 : 2"
-                    max-width="290"
-                    shaped
-                    to="/collections/1/products"
-                    >
-                    <v-card-text>
-                        <v-row>
-                            <v-col class="pt-0 pb-0">
-                                <p class="display-1 text--primary mb-0">
-                                    $0.00
-                                </p>
-                                <div class="mt-0 pt-0">Daily revenue</div>
-                            </v-col>
-                            <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
-                                <v-icon x-large color="rgb(187, 162, 87)">mdi-currency-usd</v-icon>
-                            </v-col>
-                        </v-row>
+                        <v-card
+                        :elevation="hover ? 12 : 2"
+                        max-width="290"
+                        shaped
+                        to="/admin/customers"
+                        >
+                        <v-card-text>
+                            <v-row>
+                                <v-col class="pt-0 pb-0">
+                                    <p class="display-1 text--primary mb-0">
+                                        0
+                                    </p>
+                                    <div class="mt-0 pt-0">New Customers</div>
+                                </v-col>
+                                <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
+                                    <v-icon x-large color="rgb(187, 162, 87)">mdi-account</v-icon>
+                                </v-col>
+                            </v-row>
 
 
-                    </v-card-text>
-                    </v-card>
-                    </v-hover>
+                        </v-card-text>
+                        </v-card>
+                        </v-hover>
                     </v-col>
+
+                    <!-- Daily Revenue -->
                     <v-col>
                         <v-hover v-slot="{ hover }">
-                    <v-card
-                    :elevation="hover ? 12 : 2"
-                    max-width="290"
-                    shaped
-                    to="/admin/customers"
-                    >
-                    <v-progress-circular
-                    style="text-align:center"
-                    indeterminate
-                    color="rgb(187, 162, 87)"
-                    v-if="isLoading"
-                    ></v-progress-circular>
-                    <v-card-text v-if="!isLoading">
-                        <v-row>
-                            <v-col class="pt-0 pb-0">
-                                <p class="display-1 text--primary mb-0">
-                                    {{totalUsers}}
-                                </p>
-                                <div class="mt-0 pt-0">Total Customers</div>
-                            </v-col>
-                            <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
-                                <v-icon x-large color="rgb(187, 162, 87)">mdi-account</v-icon>
-                            </v-col>
-                        </v-row>
+                            <v-card
+                            :elevation="hover ? 12 : 2"
+                            max-width="290"
+                            shaped
+                            to="/collections/1/products"
+                            >
+                            <v-card-text>
+                                <v-row>
+                                    <v-col class="pt-0 pb-0">
+                                        <p class="display-1 text--primary mb-0">
+                                            $0.00
+                                        </p>
+                                        <div class="mt-0 pt-0">Daily revenue</div>
+                                    </v-col>
+                                    <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
+                                        <v-icon x-large color="rgb(187, 162, 87)">mdi-currency-usd</v-icon>
+                                    </v-col>
+                                </v-row>
 
 
-                    </v-card-text>
-                    </v-card>
-                    </v-hover>
+                            </v-card-text>
+                            </v-card>
+                        </v-hover>
+                    </v-col>
+
+                    <!-- Total Customers -->
+                    <v-col>
+                        <v-hover v-slot="{ hover }">
+                            <v-card
+                            :elevation="hover ? 12 : 2"
+                            max-width="290"
+                            height="94"
+                            shaped
+                            to="/admin/customers"
+                            :loading="isLoading"
+                            >
+                            <template slot="progress">
+                                <v-progress-linear color="rgb(187, 162, 87)" indeterminate></v-progress-linear>
+                            </template>
+
+
+                            <v-card-text v-if="!isLoading">
+                                <v-row>
+                                    <v-col class="pt-0 pb-0">
+                                        <p class="display-1 text--primary mb-0">
+                                            {{totalUsers}}
+                                        </p>
+                                        <div class="mt-0 pt-0">Total Customers</div>
+                                    </v-col>
+                                    <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
+                                        <v-icon x-large color="rgb(187, 162, 87)">mdi-account</v-icon>
+                                    </v-col>
+                                </v-row>
+
+
+                            </v-card-text>
+                            </v-card>
+                        </v-hover>
                     </v-col>
                 </v-row>
 
                 <v-row no-gutters class="ml-5 mt-6">
-                    <v-col>
-            <v-hover v-slot="{ hover }">
-            <v-card
-            :elevation="hover ? 12 : 2"
-            max-width="290"
-            shaped
-            to="/admin/customers"
-            >
-            <v-card-text>
-                <v-row>
-                    <v-col class="pt-0 pb-0">
-                        <p class="display-1 text--primary mb-0">
-                            0
-                        </p>
-                        <div class="mt-0 pt-0">Total Courses</div>
-                    </v-col>
-                    <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
-                        <v-icon x-large color="rgb(187, 162, 87)">mdi-book-open-page-variant</v-icon>
-                    </v-col>
-                </v-row>
 
-
-            </v-card-text>
-            </v-card>
-            </v-hover>
-                    </v-col>
+                    <!-- Total Courses -->
                     <v-col>
                         <v-hover v-slot="{ hover }">
-                    <v-card
-                    :elevation="hover ? 12 : 2"
-                    max-width="290"
-                    shaped
-                    to="/collections/1/products"
-                    >
-                    <v-card-text>
-                        <v-row>
-                            <v-col class="pt-0 pb-0">
-                                <p class="display-1 text--primary mb-0">
-                                    $0.00
-                                </p>
-                                <div class="mt-0 pt-0">Products revenue</div>
-                            </v-col>
-                            <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
-                                <v-icon x-large color="rgb(187, 162, 87)">mdi-currency-usd</v-icon>
-                            </v-col>
-                        </v-row>
+                        <v-card
+                        :elevation="hover ? 12 : 2"
+                        max-width="290"
+                        shaped
+                        to="/admin/customers"
+                        >
+                        <v-card-text>
+                            <v-row>
+                                <v-col class="pt-0 pb-0">
+                                    <p class="display-1 text--primary mb-0">
+                                        0
+                                    </p>
+                                    <div class="mt-0 pt-0">Total Courses</div>
+                                </v-col>
+                                <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
+                                    <v-icon x-large color="rgb(187, 162, 87)">mdi-book-open-page-variant</v-icon>
+                                </v-col>
+                            </v-row>
 
 
-                    </v-card-text>
-                    </v-card>
-                    </v-hover>
+                        </v-card-text>
+                        </v-card>
+                        </v-hover>
                     </v-col>
+
+                    <!-- Products Revenue -->
                     <v-col>
                         <v-hover v-slot="{ hover }">
-                    <v-card
-                    :elevation="hover ? 12 : 2"
-                    max-width="290"
-                    shaped
-                    to="/collections/1/products"
-                    >
-                    <v-card-text>
-                        <v-row>
-                            <v-col class="pt-0 pb-0">
-                                <p class="display-1 text--primary mb-0">
-                                    $0.00
-                                </p>
-                                <div class="mt-0 pt-0">Courses revenue</div>
-                            </v-col>
-                            <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
-                                <v-icon x-large color="rgb(187, 162, 87)">mdi-currency-usd</v-icon>
-                            </v-col>
-                        </v-row>
+                            <v-card
+                            :elevation="hover ? 12 : 2"
+                            max-width="290"
+                            shaped
+                            to="/collections/1/products"
+                            >
+                            <v-card-text>
+                                <v-row>
+                                    <v-col class="pt-0 pb-0">
+                                        <p class="display-1 text--primary mb-0">
+                                            $0.00
+                                        </p>
+                                        <div class="mt-0 pt-0">Products revenue</div>
+                                    </v-col>
+                                    <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
+                                        <v-icon x-large color="rgb(187, 162, 87)">mdi-currency-usd</v-icon>
+                                    </v-col>
+                                </v-row>
 
 
-                    </v-card-text>
-                    </v-card>
-                    </v-hover>
+                            </v-card-text>
+                            </v-card>
+                        </v-hover>
+                    </v-col>
+
+                    <!-- Courses Revenue -->
+                    <v-col>
+                        <v-hover v-slot="{ hover }">
+                            <v-card
+                            :elevation="hover ? 12 : 2"
+                            max-width="290"
+                            shaped
+                            to="/collections/1/products"
+                            >
+                            <v-card-text>
+                                <v-row>
+                                    <v-col class="pt-0 pb-0">
+                                        <p class="display-1 text--primary mb-0">
+                                            $0.00
+                                        </p>
+                                        <div class="mt-0 pt-0">Courses revenue</div>
+                                    </v-col>
+                                    <v-col class="pb-0 pt-0 mt-2" style="text-align: center;">
+                                        <v-icon x-large color="rgb(187, 162, 87)">mdi-currency-usd</v-icon>
+                                    </v-col>
+                                </v-row>
+
+
+                            </v-card-text>
+                            </v-card>
+                        </v-hover>
                     </v-col>
                 </v-row>
             </v-col>
 
             <!-- Customer Registrations -->
-            <v-col cols="6"
-        md="4">
+            <v-col
+            cols="6"
+            md="4"
+            >
                 <v-card
-                    class="mt-4 mx-auto"
-                    width="450px"
+                class="mt-4 mx-auto"
+                width="450px"
                 >
                     <v-sheet
                     class="v-sheet--offset mx-auto"

@@ -13,14 +13,11 @@
             cols="6"
             md="2"
             >
-                <v-card
-            class="ma-0 pa-0"
-            width="100vh"
-            tile
-            height="100vh"
-        >
 
-            <v-list rounded>
+
+            <v-list rounded class="ma-0 pa-0"
+            width="100vh"
+            height="100vh">
             <v-subheader>Admin</v-subheader>
             <v-list-item-group
                 v-model="selectedItem"
@@ -40,7 +37,7 @@
                 </v-list-item>
             </v-list-item-group>
             </v-list>
-            </v-card>
+
             </v-col>
 
             <v-col cols="12"
@@ -85,7 +82,7 @@ export default {
     { text: 'Dashboard', icon: 'mdi-view-dashboard', route: '/admin/dashboard'},
     { text: 'Customers', icon: 'mdi-account', route: '/admin/customers'},
     { text: 'Revenue', icon: 'mdi-currency-usd', route: '' },
-    { text: 'Products', icon: 'mdi-view-list', route: '' },
+    { text: 'Inventory', icon: 'mdi-view-list', route: '/admin/inventory' },
     ],
     })
 }

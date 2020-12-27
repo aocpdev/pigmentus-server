@@ -12,6 +12,9 @@ import Products from '../components/Products.vue'
 import Admin from '../views/AdminView.vue'
 import Dashboard from '../components/admin/Dashboard.vue'
 import Customers from '../components/admin/Customers.vue'
+import AdminInventory from '../components/admin/Inventory.vue'
+import AdminProducts from '../components/admin/Products.vue'
+import AdminCollections from '../components/admin/Collections.vue'
 
 
 
@@ -66,6 +69,12 @@ Vue.use(VueRouter)
     children: [
       { path: 'dashboard', name: 'dashboard', component: Dashboard},
       { path: 'customers', name: 'customers', component: Customers},
+      { path: 'inventory', name: 'inventory', component: AdminInventory,
+        children: [
+          { path: 'products', name: 'adminProducts', component: AdminProducts},
+          { path: 'collections', name: 'adminCollections', component: AdminCollections},
+        ]
+      },
     ]
   },
 

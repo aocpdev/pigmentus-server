@@ -56,8 +56,9 @@ export default {
                     let collectionsObj = {
                         id: item.id,
                         name: item.name,
-                        disabled: item.disabled,
-                        route: `/collections/${item.id}/products`
+                        enabled: item.enabled,
+                        route: `/collections/${item.id}/products`,
+                        description: item.description
                     }
                     this.collections.push(collectionsObj);
                 });
