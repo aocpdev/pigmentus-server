@@ -8,18 +8,18 @@ const getInventory = function () {
 }
 
 const saveProduct = function (product) {
-    return pool.query('INSERT INTO products (name, description, image, price, collection_id, date_created, date_modified, enabled, categories, in_stock) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
+    return pool.query('INSERT INTO products (name, description, image, customer_price, collection_id, date_created, date_modified, enabled, in_stock, purchase_price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
     [
         product.name,
         product.description,
-        product.images,
-        product.price,
+        product.image,
+        product.customerPrice,
         product.colectionId,
         product.dateCreated,
         product.dateModified,
         product.enabled,
-        product.categories,
-        product.inStock
+        product.inStock,
+        product.purchasePrice
     ])
 }
 

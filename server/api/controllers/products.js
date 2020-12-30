@@ -29,18 +29,23 @@ exports.getInventory = (req, res, next) => {
 }
 
 exports.saveProduct = (req, res, next) => {
-    try {
-        saveProduct(req.body)
-        .then( product => {
-            res.status().json({
-                message: "product added succesfully",
-                newId: product.id
-            })
-        }).catch(err => res.status(401).json({ err }));
-    } catch (error) {
-        res.status(500).json({
-            messags: 'Error ocurred',
-            error
-        })
-    }
+
+    const product = req.body;
+
+    console.log(req.body);
+
+    // try {
+    //     saveProduct(req.body)
+    //     .then( product => {
+    //         res.status().json({
+    //             message: "product added succesfully",
+    //             newId: product.id
+    //         })
+    //     }).catch(err => res.status(401).json({ err }));
+    // } catch (error) {
+    //     res.status(500).json({
+    //         messags: 'Error ocurred',
+    //         error
+    //     })
+    // }
 }
