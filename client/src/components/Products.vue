@@ -60,7 +60,7 @@
                     </v-col>
 
                     <v-col class="my-4 subtitle-1 mb-0" style="text-align: right">
-                        ${{item.price}}
+                        ${{item.customer_price}}
                     </v-col>
                     </v-row>
 
