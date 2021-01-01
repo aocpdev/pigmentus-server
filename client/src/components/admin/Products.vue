@@ -86,14 +86,14 @@
                                 <v-select
                                 label="Collections"
                                 dense
-                                :items="collections"
                                 v-model="editedItem.collectionId"
+                                :items="collections"
                                 item-text="name"
                                 item-value="id"
                                 color="rgb(187, 162, 87)"
                                 >
                                 </v-select>
-                                
+
                             </v-col>
 
                             <v-col
@@ -101,12 +101,18 @@
                                 sm="4"
                                 md="4"
                             >
-                                <v-text-field
+                                <v-currency-field
+                                label="Customer price"
+                                prefix="$"
+                                color="rgb(187, 162, 87)"
+                                v-model="editedItem.customerPrice"/>
+
+                                <!-- <v-text-field
                                 v-model="editedItem.customerPrice"
                                 label="Customer price"
                                 prefix="$"
                                 color="rgb(187, 162, 87)"
-                                ></v-text-field>
+                                ></v-text-field> -->
                             </v-col>
                             <v-col
                                 cols="12"
@@ -142,7 +148,7 @@
                                 ></v-textarea>
                             </v-col>
 
-                            <v-col 
+                            <v-col
                                 cols="12"
                             >
                                 <v-textarea
@@ -152,8 +158,8 @@
                                 ></v-textarea>
                             </v-col>
 
-                            
-                            
+
+
                             </v-row>
                         </v-container>
                         </v-card-text>
@@ -268,6 +274,26 @@
             <!-- Description Expansion Panel -->
             <template v-slot:expanded-item="{ headers, item }">
             <td :colspan="headers.length">
+                <v-row no-gutters>
+                    <v-col
+                        cols="12"
+                        sm="4"
+                    >
+                        <b>Created date: </b> {{new Date(item.dateCreated).toLocaleString()}}
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        sm="4"
+                    >
+                        <b>Modified date: </b> <span v-if="item.dateModified !== null " > {{new Date(item.dateModified).toLocaleString()}} </span>
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        sm="4"
+                    >
+
+                    </v-col>
+                </v-row>
                 <b>Description: </b> {{ item.description }}
             </td>
             </template>
@@ -287,7 +313,6 @@
             <v-btn
             color="rgb(187, 162, 87)"
             text
-            shaped
             v-bind="attrs"
             @click="snackbar = false"
             >
@@ -301,6 +326,7 @@
 
 <script>
 import axios from 'axios'
+import router from '../../router/index'
 export default {
     name: "AdminProducts",
     data() {
@@ -329,25 +355,34 @@ export default {
             snackbar: false,
             text: '',
             editedItem: {
+                id: 0,
                 name: '',
                 description: '',
-                inStock: 0,
                 image: '',
                 customerPrice: 0,
                 collectionId: 0,
+                dateCreated: null,
+                dateModified: null,
+                enabled: false,
+                inStock: 0,
                 purchasePrice: 0,
+
             },
             defaultItem: {
+                id: 0,
                 name: '',
                 description: '',
-                inStock: 0,
                 image: '',
                 customerPrice: 0,
                 collectionId: 0,
+                dateCreated: null,
+                dateModified: null,
+                enabled: false,
+                inStock: 0,
                 purchasePrice: 0,
             },
             imageURL: '',
-            productName: '',  
+            productName: '',
         }
     },
     computed: {
@@ -377,35 +412,24 @@ export default {
             this.getCollections().then(res => {
                 res.data.collections.rows.forEach(item => {
                     if (item.id !== 1){
-                        this.collections.push(item)  
+                        this.collections.push(item)
                     }
                 })
                 axios.get('api/v1.0/products/inventory')
                 .then(res => {
-                    res.data.inventory.rows.forEach( item => {
-                        if (item.id !== 1) {
-                            this.collections.forEach(collection => {
-                            if (collection.id === item.collection_id){
-                                let inventoryObject = {
-                                    name: item.name,
-                                    description: item.description,
-                                    image: item.image,
-                                    customerPrice: item.customer_price,
-                                    inStock: item.in_stock,
-                                    collectionId: item.collection_id,
-                                    collectionName: collection.name,
-                                    purchasePrice: item.purchase_price,
-                                    enabled: item.enabled
-                                }
-                                this.inventory.push(inventoryObject);
-                            }
-                        })
-                        }
-                        this.isLoading = false;
-                    });
+                    this.inventory = res.data.inventory.rows;
+                    this.isLoading = false;
                 }).catch(err => console.log(err))
             });
-            
+
+        },
+        postProduct: async function (product, option) {
+            axios.post('api/v1.0/products', product).then(res => {
+                console.log(product);
+                this.getInventory();
+                this.snackbar = true;
+                this.text = option + ' Successfully'
+            }).catch(err => console.log(err))
         },
         editItem (item) {
         this.editedIndex = this.inventory.indexOf(item)
@@ -442,27 +466,26 @@ export default {
 
         save (item) {
             if (this.editedIndex > -1) {
+
+
+            } else {
                 let product = {
                     name: item.name,
                     description: item.description,
                     image: item.image,
                     customerPrice: item.customerPrice,
-                    inStock: item.inStock,
                     collectionId: item.collectionId,
-                    purchasePrice: item.purchasePrice,
-                    enabled: item.enabled
-                };
-                
+                    enabled: item.enabled,
+                    inStock: item.inStock,
+                    purchasePrice: item.purchasePrice
+
+                }
                 axios.post('api/v1.0/products', product).then(res => {
-                    console.log(allProduct);
-                    console.log(product);
                     this.getInventory();
                     this.snackbar = true;
-                    this.text = 'Edited Successfully'
+                    console.log(res);
+                    this.text = res.data.message;
                 }).catch(err => console.log(err))
-            
-            } else {
-            this.inventory.push(this.editedItem)
             }
             this.close()
         },
@@ -494,11 +517,11 @@ export default {
         opacity: 0.6;
         width: 100vh;
         height: 45px;
-        
+
     }
     .textShadow {
         text-shadow: 1px 1px rgb(187, 162, 87);
-        
+
     }
 
 </style>

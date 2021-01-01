@@ -1,12 +1,12 @@
 <template>
-<v-row no-gutters width="100vh" class="ml-0 mr-0 pr-0 pl-0 pt-0">
+
+    <v-row no-gutters width="100vh" class="ml-0 mr-0 pr-0 pl-0 pt-0" >
     <v-tabs width="100vh" background-color="rgb(252, 249, 237)" light color="rgb(187, 162, 87)" v-model="activeTab" absolute>
         <v-tab v-for="tab of tabs" :key="tab.id" :to="tab.route">
             {{ tab.name }}
         </v-tab>
 
         <v-tab-item
-        style="background-color: #F5F5F5"
         :transition="false"
         :reverse-transition="false"
         v-for="tab of tabs"
@@ -16,7 +16,8 @@
             <router-view></router-view>
         </v-tab-item>
     </v-tabs>
-</v-row>
+    </v-row>
+
 
 
     <!-- <v-row no-gutters>

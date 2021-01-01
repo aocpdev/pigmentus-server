@@ -18,11 +18,11 @@ exports.getInventory = (req, res, next) => {
     try {
         getInventory()
         .then( inventory => {
-            res.status(200).json({inventory: inventory})
+            res.status(200).json({inventory: inventory});
         }).catch(err => res.status(401).json({ err }));
     } catch (error) {
         res.status(500).json({
-            messags: 'Error ocurred',
+            message: 'Error ocurred',
             error
         })
     }
@@ -30,22 +30,32 @@ exports.getInventory = (req, res, next) => {
 
 exports.saveProduct = (req, res, next) => {
 
-    const product = req.body;
+        try {
+            const {name, description, image, customerPrice, collectionId, enabled, inStock, purchasePrice} = req.body;
+            const product =  {
+                name: name,
+                description: description,
+                image: image,
+                customerPrice: customerPrice,
+                collectionId: collectionId,
+                dateCreated: new Date(),
+                enabled: enabled,
+                inStock: inStock,
+                purchasePrice: purchasePrice
+            };
+            console.log(product);
+            saveProduct(product)
+            .then( product => {
+                res.status(200).json({
+                    message: "product added succesfully",
+                    newId: product.id
+                })
+            }).catch(err => res.status(401).json({ err }));
+        } catch (error) {
+            res.status(500).json({
+                message: 'Error ocurred',
+                error
+            })
+        }
 
-    console.log(req.body);
-
-    // try {
-    //     saveProduct(req.body)
-    //     .then( product => {
-    //         res.status().json({
-    //             message: "product added succesfully",
-    //             newId: product.id
-    //         })
-    //     }).catch(err => res.status(401).json({ err }));
-    // } catch (error) {
-    //     res.status(500).json({
-    //         messags: 'Error ocurred',
-    //         error
-    //     })
-    // }
 }

@@ -6,11 +6,26 @@ import Bootstrap from 'bootstrap-vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import vuetify from '@/plugins/vuetify'
+import VCurrencyField from 'v-currency-field'
+import { VTextField } from 'vuetify/lib'
 
 
 require('dotenv').config();
 Vue.use(VueAxios, axios, vuetify)
 Vue.use(Bootstrap)
+Vue.component('v-text-field', VTextField)
+Vue.use(VCurrencyField, {
+
+	locale: 'en-US',
+	decimalLength: 2,
+	autoDecimalMode: true,
+	min: null,
+	max: null,
+	defaultValue: 0,
+  valueAsInteger: false,
+  allowNegative: true
+
+})
 
 
 import 'bootstrap/dist/css/bootstrap.css'

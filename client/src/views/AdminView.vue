@@ -9,14 +9,16 @@
             md="2"
         > -->
         <v-row no-gutters>
-            <v-col
+
+            <!-- <v-col
             cols="6"
             md="2"
+            class="hidden-md-and-down"
             >
 
 
             <v-list rounded class="ma-0 pa-0"
-            width="100vh"
+            width="300px"
             height="100vh">
             <v-subheader>Admin</v-subheader>
             <v-list-item-group
@@ -38,12 +40,30 @@
             </v-list-item-group>
             </v-list>
 
-            </v-col>
+            </v-col> -->
 
+            <v-toolbar
+            dense
+            style="background-color: rgb(252, 249, 237)"
+            >
+            <v-toolbar-title>Admin</v-toolbar-title>
+            <v-spacer></v-spacer>
+
+            <v-btn
+                v-for="(item, i) in items"
+                :key="i"
+                :to="item.route"
+                text
+                x-small
+                color="black"
+                style="color: rgb(252, 249, 237);"
+            >
+                {{item.text}}
+            </v-btn>
+            </v-toolbar>
             <v-col cols="12"
-            sm="8"
-            md="10"
-            style="background-color: #F5F5F5">
+
+            >
                 <v-main class="pt-0">
                 <router-view></router-view>
             </v-main>
@@ -83,6 +103,10 @@ export default {
     { text: 'Customers', icon: 'mdi-account', route: '/admin/customers'},
     { text: 'Revenue', icon: 'mdi-currency-usd', route: '' },
     { text: 'Inventory', icon: 'mdi-view-list', route: '/admin/inventory' },
+    { text: 'Orders', icon: 'mdi-history', route: '' },
+    { text: 'Courses', icon: 'mdi-history', route: '' },
+    { text: 'Purchases', icon: 'mdi-history', route: '' },
+    { text: 'Expenses', icon: 'mdi-history', route: '' },
     ],
     })
 }
@@ -105,4 +129,6 @@ export default {
         font-family: 'Fredericka the Great', cursive;
         width: 100%;
     }
+
+
 </style>

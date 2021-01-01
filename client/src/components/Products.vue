@@ -29,9 +29,9 @@
                     </v-img>
                 <!-- </v-hover> -->
                 <v-card-text style="position: relative;" class="pb-0">
-                    <v-btn absolute color="red" class="white--text mt-n8" icon medium right top>
+                    <!-- <v-btn absolute color="red" class="white--text mt-n8" icon medium right top>
                         <v-icon>mdi-heart</v-icon>
-                    </v-btn>
+                    </v-btn> -->
                 </v-card-text>
                 <v-card-subtitle class="pt-0 pb-0"><b>{{item.name}}</b></v-card-subtitle>
 
@@ -109,11 +109,18 @@ export default {
     },
     methods: {
         getProducts: async function (collectionId) {
-            axios.get('api/v1.0/products', { params: { collectionId: collectionId } })
-            .then(res => {
-                this.products = res.data.products.rows;
-                console.log(res);
-            }).catch(err => console.log(err))
+            if (collectionId === 1) {
+                axios.get('api/v1.0/products/inventory')
+                .then(res => {
+                    this.products = res.data.inventory.rows;
+                }).catch(err => console.log(err))
+            } else {
+                axios.get('api/v1.0/products', { params: { collectionId: collectionId } })
+                .then(res => {
+                    this.products = res.data.products.rows;
+                }).catch(err => console.log(err))
+            }
+
         }
     },
     created() {

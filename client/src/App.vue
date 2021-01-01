@@ -26,6 +26,7 @@
         class="ma-2"
         color="white"
         text
+        x-small
       >
         Shop
       </v-btn>
@@ -34,14 +35,16 @@
         class="ma-2"
         color="white"
         text
+        x-small
       >
-        Cursos
+        Courses
       </v-btn>
       <v-btn
         to="/admin"
         class="ma-2"
         color="white"
         text
+        x-small
       >
         Admin
       </v-btn>
@@ -52,6 +55,7 @@
         color="white"
         v-if="$store.state.isLogin"
         text
+        x-small
       >
         My Course
       </v-btn>
@@ -61,8 +65,9 @@
         tile
         large
         color="white"
-        icon to="/cart">
-        <v-icon>mdi-cart</v-icon>
+        icon to="/cart"
+        >
+        <v-icon small>mdi-cart</v-icon>
       </v-btn>
 
       <v-btn
@@ -71,6 +76,7 @@
         color="white"
         v-if="!$store.state.isLogin"
         text
+        x-small
       >
         Sign Up
       </v-btn>
@@ -80,6 +86,7 @@
         color="white"
         v-if="!$store.state.isLogin"
         text
+        x-small
       >
         Sign In
       </v-btn>
@@ -93,17 +100,18 @@
           offset-y
         >
           <template v-slot:activator="{ attrs, on }">
-            <v-btn class="mx-2" fab v-bind="attrs" v-on="on" outlined color="rgb(187, 162, 87)">
+            <v-btn icon v-bind="attrs" v-on="on" >
               <v-badge overlap color="red">
                 <template v-slot:badge>
                   <span>3</span>
                 </template>
 
-                <v-avatar>
-                  <img
+                <v-avatar color="rgb(187, 162, 87)" size="36">
+                  <!-- <img
                     src="https://i1.sndcdn.com/avatars-000143584345-3qxowr-t500x500.jpg"
                     alt="John"
-                  >
+                  > -->
+                <span>{{$store.state.user.name.charAt(0)}} {{$store.state.user.lastName.charAt(0)}}</span>
                 </v-avatar>
               </v-badge>
           </v-btn>

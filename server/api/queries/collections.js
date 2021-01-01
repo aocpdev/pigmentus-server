@@ -1,7 +1,7 @@
 const { pool } = require('../../config/database');
 
 const getCollections = function () {
-    return pool.query('SELECT * FROM collections');
+    return pool.query('SELECT * FROM collections ORDER BY collections.name');
 }
 
 const saveCollection = function (collection) {

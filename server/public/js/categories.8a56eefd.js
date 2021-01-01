@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["categories"],{"58c2":function(e,t,s){"use strict";s.r(t);var a=function(){var e=this,t=e.$createElement,s=e._self._c||t;return s("v-row",{attrs:{justify:"center"}},[s("h1",[e._v("Oye "+e._s(e.$store.state.user.name)+" "+e._s(e.$store.state.user.lastName)+" Categorizame este.")])])},r=[],n={},o=n,u=s("2877"),c=s("6544"),l=s.n(c),i=s("0fd9"),w=Object(u["a"])(o,a,r,!1,null,null,null);t["default"]=w.exports;l()(w,{VRow:i["a"]})}}]);
+//# sourceMappingURL=categories.8a56eefd.js.map
