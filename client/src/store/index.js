@@ -36,7 +36,7 @@ export default new Vuex.Store({
   },
   actions: {
     isAuth: async function ({commit}) {
-      axios.get('http://pigmentus.herokuapp/api/v1.0/auth')
+      axios.get('https://pigmentus.herokuapp/api/v1.0/auth')
         .then(user => {
           if (user.data.user === '') {
             state.user = "";
