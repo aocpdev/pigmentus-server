@@ -10,25 +10,12 @@ require('dotenv').config();
 
 const app = express();
 
-const corsOpts = {
-    origin: '*',
-
-    methods: [
-      'GET',
-      'POST',
-    ],
-
-    allowedHeaders: [
-      'Content-Type',
-    ],
-  };
-
-  app.use(cors(corsOpts));
 
 
 // Midlewares
 app.use(cookieParser())
 app.use(morgan('tiny'));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
