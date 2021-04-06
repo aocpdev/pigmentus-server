@@ -9,13 +9,16 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const app = express();
-
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200,
+  }
 
 
 // Midlewares
 app.use(cookieParser())
 app.use(morgan('tiny'));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -25,6 +28,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+
 
 // Routes
 app.use('/api/v1.0', require('./api/routes/index'));
