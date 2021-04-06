@@ -2,23 +2,23 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import Bootstrap from 'bootstrap-vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import vuetify from '@/plugins/vuetify'
 import VCurrencyField from 'v-currency-field'
 import { VTextField } from 'vuetify/lib'
-
+import VueLodash from 'vue-lodash'
+import lodash from 'lodash'
 
 require('dotenv').config();
 Vue.use(VueAxios, axios, vuetify)
-Vue.use(Bootstrap)
+Vue.use(VueLodash, { lodash: lodash })
 Vue.component('v-text-field', VTextField)
 Vue.use(VCurrencyField, {
 
 	locale: 'en-US',
 	decimalLength: 2,
-	autoDecimalMode: true,
+	autoDecimalMode: false,
 	min: null,
 	max: null,
 	defaultValue: 0,
@@ -26,11 +26,6 @@ Vue.use(VCurrencyField, {
   allowNegative: true
 
 })
-
-
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'vuetify/dist/vuetify.min.css'
 
 
 Vue.config.productionTip = false
@@ -47,6 +42,7 @@ Vue.config.productionTip = false
 
 
 new Vue({
+  el: '#app',
   router,
   store,
   vuetify,

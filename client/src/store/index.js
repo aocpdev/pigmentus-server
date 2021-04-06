@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     isLoading: true,
-    user: ''
+    user: '',
+    cart: ''
   },
   mutations: {
     loading(state, isLoading) {
@@ -25,12 +26,17 @@ export default new Vuex.Store({
       } else {
         state.isLogin = true;
         state.user= user;
+        axios.get('api/v1.0/cart', { params: { userId: user.id} }).then(res => {
+          state.cart = res.data.cart.rows;
+        }).catch(err => console.log(err))
+
       }
     }
+
   },
   actions: {
     isAuth: async function ({commit}) {
-      axios.get('http://pigmentus.herokuapp.com/api/v1.0/auth')
+      axios.get('http://pigmentus.herokuapp/api/v1.0/auth')
         .then(user => {
           if (user.data.user === '') {
             state.user = "";

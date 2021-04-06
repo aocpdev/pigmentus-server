@@ -64,7 +64,7 @@
             <v-col cols="12"
 
             >
-                <v-main class="pt-0">
+            <v-main class="pt-0">
                 <router-view></router-view>
             </v-main>
             </v-col>
@@ -113,22 +113,7 @@ export default {
 </script>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
-    div.my-tabs [role="tab"] {
-        justify-content: flex-start;
-    }
-    .v-tab {
-        text-transform: none !important;
-    }
 
-    .shopTitle {
-        text-align: center;
-
-    }
-    h1{
-        font-family: 'Fredericka the Great', cursive;
-        width: 100%;
-    }
 
 
 </style>

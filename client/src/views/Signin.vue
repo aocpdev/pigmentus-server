@@ -99,7 +99,7 @@ export default {
             email: res.data.email,
             preferences: res.data.preferences
           }
-          this.setUser(user );
+          this.setUser(user);
           router.push('/');
         })
         .catch(err => {

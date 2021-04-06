@@ -1,270 +1,338 @@
 <template>
-  <v-row no-gutters width="100vh" class="ml-0 mr-0 pr-0 pl-0 pt-0">
-    <v-tabs width="100vh" background-color="rgb(252, 249, 237)" light color="rgb(187, 162, 87)">
-      <v-tab>Microblading</v-tab>
-      <v-tab>Pestanas</v-tab>
-      <v-tab>Item Three</v-tab>
+  <div>
+    <v-carousel reverse-transition="fade-transition"
+      transition="fade-transition" hide-delimiters
+    >
+      <v-carousel-item
+        :src="require('../assets/FirstImage.png')"
+      >
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
 
-      <v-tab-item>
-        <v-container fluid>
-          <div style="text-align: center"><h1><b>Microblading</b></h1></div>
+        </v-row>
+      </v-carousel-item>
+      <v-carousel-item
+        :src="require('../assets/SecondImage.png')"
+      >
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
 
-          <v-row>
-            <v-card
-            :loading="loading"
-            class="mx-auto my-12"
-            max-width="374"
-          >
-          <template slot="progress">
-            <v-progress-linear
-              color="deep-purple"
-              height="10"
-              indeterminate
-            ></v-progress-linear>
-          </template>
+        </v-row>
+      </v-carousel-item>
+
+    </v-carousel>
+    <div class="pl-4 pr-4 row">
+      <div
+       class="col-md-6 col-sm-6 col-xs-12"
+      >
+        <v-card>
 
           <v-img
-            height="250"
-            src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-          ></v-img>
-
-          <v-card-title>Cafe Badilico</v-card-title>
-
-          <v-card-text>
-            <v-row
-              align="center"
-              class="mx-0"
-            >
-              <v-rating
-                :value="4.5"
-                color="amber"
-                dense
-                half-increments
-                readonly
-                size="14"
-              ></v-rating>
-
-              <div class="grey--text ml-4">
-                4.5 (413)
-              </div>
-            </v-row>
-
-            <div class="my-4 subtitle-1">
-              $ • Italian, Cafe
+            aspect-ratio="1.7"
+            contain
+            :src="require('../assets/TopPick.jpg')"
+            class="white--text align-center"
+            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            height="400px"
+          >
+           <h1 class="text-center font-size">Top Picks</h1>
+            <div class="text-center">
+              <v-btn  href="/shop" class="white--text " outlined>SHOP NOW</v-btn>
             </div>
 
-            <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-          </v-card-text>
 
-          <v-divider class="mx-4"></v-divider>
+<!--            <v-expand-transition>-->
+<!--              <div-->
+<!--                v-if="hover"-->
+<!--                class="d-flex transition-fast-in-fast-out orange darken-2 v-card&#45;&#45;reveal display-3 white&#45;&#45;text"-->
+<!--                style="height: 100%;"-->
+<!--              >-->
 
-          <v-card-title>Tonight's availability</v-card-title>
+<!--                <h3>Top Picks</h3><br/>-->
+<!--                <h3>sdfs</h3>-->
+<!--              </div>-->
+<!--            </v-expand-transition>-->
+          </v-img>
+        </v-card>
+<!--        </v-hover>-->
+      </div>
+      <div
+        class="col-md-6 col-sm-6 col-xs-12"
+      >
+        <v-card>
+          <v-img
+            aspect-ratio="1.4"
+            contain
+            :src="require('../assets/NewProducts.jpg')"
+            class="white--text align-center"
+            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            height="400px"
+          >
+            <h1 class="text-center font-size">New Arrivals</h1>
+            <div class="text-center">
+              <v-btn  href="/shop" class="white--text" outlined>SHOP NOW</v-btn>
+            </div>
+          </v-img>
+        </v-card>
+      </div>
+    </div>
+    <div class="pl-4 pr-4 row">
+      <div
+       class="col-md-4 col-sm-4 col-xs-12"
+      >
+        <v-card outlined>
+          <v-img
+            aspect-ratio="1.4"
+            contain
+            :src="require('../assets/ThirdImage.jpg')"
+            class="white--text align-center"
+            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            height="300px"
+          >
+            <h1 class="text-center font-size">Colors</h1>
+            <div class="text-center mt-2">
+              <v-btn class="white--text caption"  href="/shop" text>SHOP NOW <v-icon class="white--text caption">mdi-arrow-right</v-icon></v-btn>
+            </div>
+          </v-img>
+        </v-card>
+      </div>
+      <div
+        class="col-md-4 col-sm-4 col-xs-12"
+      >
+        <v-card outlined>
+          <v-img
+            aspect-ratio="1.4"
+            contain
+            :src="require('../assets/Needles.jpg')"
+            class="white--text align-center"
+            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            height="300px"
+          >
+            <h1 class="text-center font-size">Needles</h1>
+            <div class="text-center mt-2">
+              <v-btn class="white--text caption"  href="/shop" text>SHOP NOW <v-icon class="white--text caption">mdi-arrow-right</v-icon></v-btn>
+            </div>
+          </v-img>
+        </v-card>
+      </div>
+      <div
+        class="col-md-4 col-sm-4 col-xs-12"
+      >
+        <v-card outlined>
+          <v-img
+            aspect-ratio="1.4"
+            contain
+            :src="require('../assets/Kits.jpg')"
+            class="white--text align-center"
+            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            height="300px"
+          >
+            <h1 class="text-center font-size">Kits</h1>
+            <div class="text-center mt-2">
+              <v-btn class="white--text caption"  href="/shop" text>SHOP NOW <v-icon class="white--text caption">mdi-arrow-right</v-icon></v-btn>
+            </div>
+          </v-img>
+        </v-card>
+      </div>
+    </div>
+    <v-container>
+      <v-row no-gutters>
+        <v-col :cols="12">
+          <v-card-text
+            class=""
+            tile
+            outlined
+          >
+            <v-card-title class="subheading ">Deals of the Day</v-card-title>
+            <v-divider></v-divider>
+            <div class="row">
+              <div class="col-12 col-md-3 col-sm-6 col-xs-6 text-center">
+                <v-hover
+                  v-slot:default="{ hover }"
+                  open-delay="200"
+                >
+                  <v-card
+                    :elevation="hover ? 16 : 2"
+                >
+                  <v-img
+                    class="white--text align-end"
+                    height="200px"
 
-          <v-card-text>
-            <v-chip-group
-              v-model="selection"
-              active-class="deep-purple accent-4 white--text"
-              column
-            >
-              <v-chip>5:30PM</v-chip>
+                  >
+                    <v-card-title>Bags & Purses </v-card-title>
+                  </v-img>
 
-              <v-chip>7:30PM</v-chip>
+                  <v-card-text class="text--primary text-center">
+                    <div>Upto 60% + Extra 10%</div>
+                    <div>Baggit, Zara, Fossil</div>
+                  </v-card-text>
 
-              <v-chip>8:00PM</v-chip>
-
-              <v-chip>9:00PM</v-chip>
-            </v-chip-group>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn
-              color="deep-purple lighten-2"
-              text
-              @click="reserve"
-            >
-              Reserve
-            </v-btn>
-          </v-card-actions>
-            </v-card>
-            <v-card
-              :loading="loading"
-              class="mx-auto my-12"
-              max-width="374"
-            >
-            <template slot="progress">
-              <v-progress-linear
-                color="deep-purple"
-                height="10"
-                indeterminate
-              ></v-progress-linear>
-            </template>
-
-            <v-img
-              height="250"
-              src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-            ></v-img>
-
-            <v-card-title>Cafe Badilico</v-card-title>
-
-            <v-card-text>
-              <v-row
-                align="center"
-                class="mx-0"
-              >
-                <v-rating
-                  :value="4.5"
-                  color="amber"
-                  dense
-                  half-increments
-                  readonly
-                  size="14"
-                ></v-rating>
-
-                <div class="grey--text ml-4">
-                  4.5 (413)
-                </div>
-              </v-row>
-
-              <div class="my-4 subtitle-1">
-                $ • Italian, Cafe
+                  <div class="text-center">
+                    <v-btn
+                      href="/shop"
+                      class="ma-2"
+                      outlined
+                      color="info"
+                    >
+                      Explore
+                    </v-btn>
+                  </div>
+                </v-card>
+                </v-hover>
               </div>
+              <div class="col-12 col-md-3 col-sm-6 col-xs-6 text-center" >
+                <v-hover
+                  v-slot:default="{ hover }"
+                  open-delay="200"
+                >
+                  <v-card
+                    :elevation="hover ? 16 : 2"
+                  >
+                  <v-img
+                    class="white--text align-end"
+                    height="200px"
 
-              <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-            </v-card-text>
+                  >
+                    <v-card-title>T-Shirt </v-card-title>
+                  </v-img>
 
-            <v-divider class="mx-4"></v-divider>
+                  <v-card-text class="text--primary text-center">
+                    <div>Upto 50%</div>
+                    <div>Zara, Selected, Celio</div>
+                  </v-card-text>
 
-            <v-card-title>Tonight's availability</v-card-title>
-
-            <v-card-text>
-              <v-chip-group
-                v-model="selection"
-                active-class="deep-purple accent-4 white--text"
-                column
-              >
-                <v-chip>5:30PM</v-chip>
-
-                <v-chip>7:30PM</v-chip>
-
-                <v-chip>8:00PM</v-chip>
-
-                <v-chip>9:00PM</v-chip>
-              </v-chip-group>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn
-                color="deep-purple lighten-2"
-                text
-                @click="reserve"
-              >
-                Reserve
-              </v-btn>
-            </v-card-actions>
-            </v-card>
-
-            <v-card
-              :loading="loading"
-              class="mx-auto my-12"
-              max-width="374"
-            >
-            <template slot="progress">
-              <v-progress-linear
-                color="deep-purple"
-                height="10"
-                indeterminate
-              ></v-progress-linear>
-            </template>
-
-            <v-img
-              height="250"
-              src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-            ></v-img>
-
-            <v-card-title>Cafe Badilico</v-card-title>
-
-            <v-card-text>
-              <v-row
-                align="center"
-                class="mx-0"
-              >
-                <v-rating
-                  :value="4.5"
-                  color="amber"
-                  dense
-                  half-increments
-                  readonly
-                  size="14"
-                ></v-rating>
-
-                <div class="grey--text ml-4">
-                  4.5 (413)
-                </div>
-              </v-row>
-
-              <div class="my-4 subtitle-1">
-                $ • Italian, Cafe
+                  <div class="text-center">
+                    <v-btn href="/shop"
+                      class="ma-2"
+                      outlined
+                      color="info"
+                    >
+                      Explore
+                    </v-btn>
+                  </div>
+                </v-card>
+                </v-hover>
               </div>
+              <div class="col-12 col-md-3 col-sm-6 col-xs-6 text-center" >
+                <v-hover
+                  v-slot:default="{ hover }"
+                  open-delay="200"
+                >
+                  <v-card
+                    :elevation="hover ? 16 : 2"
+                  >
+                  <v-img
+                    class="white--text align-end"
+                    height="200px"
 
-              <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
-            </v-card-text>
+                  >
+                    <v-card-title>Jeans </v-card-title>
+                  </v-img>
 
-            <v-divider class="mx-4"></v-divider>
+                  <v-card-text class="text--primary text-center">
+                    <div>Upto 60% + Extra 10%</div>
+                    <div>Jack & Jones, Levis</div>
+                  </v-card-text>
 
-            <v-card-title>Tonight's availability</v-card-title>
+                  <div class="text-center">
+                    <v-btn href="/shop"
+                      class="ma-2"
+                      outlined
+                      color="info"
+                    >
+                      Explore
+                    </v-btn>
+                  </div>
+                </v-card>
+                </v-hover>
+              </div>
+              <div class="col-12 col-md-3 col-sm-6 col-xs-6 text-center" >
+                <v-hover
+                  v-slot:default="{ hover }"
+                  open-delay="200"
+                >
+                  <v-card
+                    :elevation="hover ? 16 : 2"
+                  >
+                  <v-img
+                    class="white--text align-end"
+                    height="200px"
 
-            <v-card-text>
-              <v-chip-group
-                v-model="selection"
-                active-class="deep-purple accent-4 white--text"
-                column
-              >
-                <v-chip>5:30PM</v-chip>
+                  >
+                    <v-card-title>Shoes </v-card-title>
+                  </v-img>
 
-                <v-chip>7:30PM</v-chip>
+                  <v-card-text class="text--primary text-center">
+                    <div>Upto 60% + Extra 10%</div>
+                    <div>Nike, Adidas, Puma</div>
+                  </v-card-text>
 
-                <v-chip>8:00PM</v-chip>
-
-                <v-chip>9:00PM</v-chip>
-              </v-chip-group>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn
-                color="deep-purple lighten-2"
-                text
-                @click="reserve"
-              >
-                Reserve
-              </v-btn>
-            </v-card-actions>
-            </v-card>
-
-          </v-row>
-
-
-      </v-container>
-    </v-tab-item>
-  </v-tabs>
-  </v-row>
-
+                  <div class="text-center">
+                    <v-btn href="/shop"
+                      class="ma-2"
+                      outlined
+                      color="info"
+                    >
+                      Explore
+                    </v-btn>
+                  </div>
+                </v-card>
+                </v-hover>
+              </div>
+            </div>
+          </v-card-text>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'Home',
-
-    data: () => ({
-      loading: false,
-      selection: 1,
-    }),
-
-    methods: {
-      reserve () {
-        this.loading = true
-
-        setTimeout(() => (this.loading = false), 2000)
-      },
-    },
-  }
+    export default {
+        data () {
+            return {
+                items: [
+                    { title: 'Click Me' },
+                    { title: 'Click Me' },
+                    { title: 'Click Me' },
+                    { title: 'Click Me 2' },
+                ],
+                activeBtn: 1,
+                colors: [
+                    'indigo',
+                    'warning',
+                    'pink darken-2',
+                    'red lighten-1',
+                    'deep-purple accent-4',
+                ],
+                slides: [
+                    'First',
+                    'Second',
+                    'Third',
+                    'Fourth',
+                    'Fifth',
+                ],
+            }
+        },
+    }
 </script>
+<style>
+  .v-card--reveal {
+    align-items: center;
+    bottom: 0;
+    justify-content: center;
+    opacity: .5;
+    position: absolute;
+    width: 100%;
+  }
+  .v-btn .v-btn__content .v-icon {
+        color: white;
+    }
+</style>
+

@@ -1,6 +1,6 @@
 <template>
 
-    <v-row no-gutters width="100vh" class="ml-0 mr-0 pr-0 pl-0 pt-0" >
+    <v-row no-gutters width="100vh" class="ml-0 mr-0 pr-0 pl-0 pt-0">
     <v-tabs width="100vh" background-color="rgb(252, 249, 237)" light color="rgb(187, 162, 87)" v-model="activeTab" absolute>
         <v-tab v-for="tab of tabs" :key="tab.id" :to="tab.route">
             {{ tab.name }}

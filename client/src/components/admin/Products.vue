@@ -2,28 +2,9 @@
     <v-row no-gutters>
     <h1 style="text-align: center;"> Online Products</h1>
     <v-col  cols="12" class="pl-10 pr-10">
-        <v-data-table
-        :headers="headers"
-        :items="inventory"
-        item-key="name"
-        :search="search"
-        class="elevation-1 mb-2"
-        :loading="isLoading"
-        loading-text="Loading... Please wait"
-        show-expand
-        single-expand
-        :expanded.sync="expanded"
-        >
-            <!-- Loading Linear -->
-            <template slot="progress">
-                <v-progress-linear color="rgb(187, 162, 87)" indeterminate></v-progress-linear>
-            </template>
-
-            <template v-slot:top>
-            <v-toolbar
-                flat
-            >
-                <v-toolbar-title>My online products</v-toolbar-title>
+        <v-card>
+            <v-card-title>
+                All Products
                 <v-divider
                 class="mx-4"
                 inset
@@ -51,7 +32,7 @@
                         <v-btn
                         color="rgb(187, 162, 87)"
                         dark
-                        class="mb-2"
+                        class="mb-2 mt-4"
                         v-bind="attrs"
                         v-on="on"
                         >
@@ -132,6 +113,17 @@
                                 md="4"
                             >
                                 <v-text-field
+                                v-model="editedItem.weight"
+                                label="Weight"
+                                color="rgb(187, 162, 87)"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col
+                                cols="12"
+                                sm="4"
+                                md="4"
+                            >
+                                <v-text-field
                                 v-model="editedItem.inStock"
                                 label="In stock"
                                 color="rgb(187, 162, 87)"
@@ -165,6 +157,12 @@
                         </v-card-text>
 
                         <v-card-actions>
+                            <v-switch
+                            v-model="editedItem.enabled"
+                            label="Enabled"
+                            color="success"
+                            hide-details
+                            ></v-switch>
                         <v-spacer></v-spacer>
                         <v-btn
                             color="blue darken-1"
@@ -183,6 +181,28 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
+            </v-card-title>
+            <v-data-table
+        :headers="headers"
+        :items="inventory"
+        item-key="name"
+        :search="search"
+        class="elevation-1 mb-2"
+        :loading="isLoading"
+        loading-text="Loading... Please wait"
+        show-expand
+        single-expand
+        :expanded.sync="expanded"
+        >
+            <!-- Loading Linear -->
+            <template slot="progress">
+                <v-progress-linear color="rgb(187, 162, 87)" indeterminate></v-progress-linear>
+            </template>
+
+            <template v-slot:top>
+            <v-toolbar
+                flat
+            >
 
                 <!-- Image Dialog -->
                 <v-dialog
@@ -299,6 +319,8 @@
             </template>
 
         </v-data-table>
+        </v-card>
+
     </v-col>
 
     <!-- Snackbar to represent added product successfully -->
@@ -327,6 +349,7 @@
 <script>
 import axios from 'axios'
 import router from '../../router/index'
+import xml2js from '../../../../node_modules/xml2js'
 export default {
     name: "AdminProducts",
     data() {
@@ -340,6 +363,7 @@ export default {
             { text: 'Enabled', value: 'enabled', width:"125px" },
             { text: 'Customer price ($)', value: 'customerPrice', width:"160px" },
             { text: 'Purchase price ($)', value: 'purchasePrice', width:"150px" },
+            {text: 'Weight oz', value: 'weight', width: "110px"},
             { text: 'In stock', value: 'inStock', width:"100px" },
             { text: 'Image', value: 'image', sortable: false, width:"150px" },
             { text: 'Actions', value: 'actions', sortable: false, width:"125px" },
@@ -366,7 +390,7 @@ export default {
                 enabled: false,
                 inStock: 0,
                 purchasePrice: 0,
-
+                weight: 0,
             },
             defaultItem: {
                 id: 0,
@@ -380,6 +404,7 @@ export default {
                 enabled: false,
                 inStock: 0,
                 purchasePrice: 0,
+                weight: 0,
             },
             imageURL: '',
             productName: '',
@@ -477,7 +502,8 @@ export default {
                     collectionId: item.collectionId,
                     enabled: item.enabled,
                     inStock: item.inStock,
-                    purchasePrice: item.purchasePrice
+                    purchasePrice: item.purchasePrice,
+                    weight: item.weight
 
                 }
                 axios.post('api/v1.0/products', product).then(res => {
@@ -500,6 +526,42 @@ export default {
     },
     created() {
         this.getInventory();
+        let builder = new xml2js.Builder();
+        let mono = {
+        RateV4Request: {
+            $: {
+                "USERID": "890PIGME2253"
+            },
+            Revision: 2,
+            Package: {
+                $: {
+                    "ID": 0
+                },
+                Service: "PRIORITY",
+                ZipOrigination: "00777",
+                ZipDestination: "00778",
+                Pounds: "0",
+                Ounces: "10",
+                Container: "",
+                Width: "",
+                Length: "",
+                Height: "",
+                Girth: "",
+                Machinable: "TRUE",
+
+            },
+
+        }
+
+    };
+    let monito = builder.buildObject(mono);
+    axios.post('https://secure.shippingapis.com/ShippingAPI.dll?API=RateV4&XML=', null, { params: {XML: monito} } )
+    .then(re => {
+        console.log(re)
+    })
+    .catch(error => {
+        console.error(error)
+    })
     },
 }
 </script>
